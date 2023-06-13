@@ -1,11 +1,11 @@
 {
   "name": "quantaqueue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "src/main.ts",
   "repository": "https://github.com/gustavoerivero/formulae.git",
   "author": "<gustavoerivero12@gmail.com>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "@types/node": "^20.3.1",
     "ts-node": "^10.9.1",

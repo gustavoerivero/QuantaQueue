@@ -1,9 +1,9 @@
 # QuantaQueue
 
 <div align="center">
-  <img src="https://img.shields.io/npm/v/QuantaQueue" alt="npm version" />
+  <img src="https://img.shields.io/npm/v/quantaqueue" alt="npm version" />
   <img src="https://img.shields.io/github/repo-size/gustavoerivero/QuantaQueue" alt="project size" />
-  <img src="https://img.shields.io/npm/l/QuantaQueue" alt="project license" />
+  <img src="https://img.shields.io/npm/l/quantaqueue" alt="project license" />
   <img src="https://img.shields.io/github/contributors/gustavoerivero/QuantaQueue" alt="project collabs" />
   <img src="https://img.shields.io/github/last-commit/gustavoerivero/QuantaQueue" alt="project last commit" />
   <img src="https://img.shields.io/github/languages/count/gustavoerivero/QuantaQueue" alt="project languages" />
