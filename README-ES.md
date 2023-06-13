@@ -1,13 +1,13 @@
 # QuantaQueue
 
 <div align="center">
-  <img src="https://img.shields.io/npm/v/quantaqueue" alt="npm version" />
-  <img src="https://img.shields.io/github/repo-size/gustavoerivero/quantaqueue" alt="project size" />
-  <img src="https://img.shields.io/npm/l/quantaqueue" alt="project license" />
-  <img src="https://img.shields.io/github/contributors/gustavoerivero/quantaqueue" alt="project collabs" />
-  <img src="https://img.shields.io/github/last-commit/gustavoerivero/quantaqueue" alt="project last commit" />
-  <img src="https://img.shields.io/github/languages/count/gustavoerivero/quantaqueue" alt="project languages" />
-  <img src="https://img.shields.io/github/languages/top/gustavoerivero/quantaqueue" alt="project major language percent" />
+  <img src="https://img.shields.io/npm/v/QuantaQueue" alt="npm version" />
+  <img src="https://img.shields.io/github/repo-size/gustavoerivero/QuantaQueue" alt="project size" />
+  <img src="https://img.shields.io/npm/l/QuantaQueue" alt="project license" />
+  <img src="https://img.shields.io/github/contributors/gustavoerivero/QuantaQueue" alt="project collabs" />
+  <img src="https://img.shields.io/github/last-commit/gustavoerivero/QuantaQueue" alt="project last commit" />
+  <img src="https://img.shields.io/github/languages/count/gustavoerivero/QuantaQueue" alt="project languages" />
+  <img src="https://img.shields.io/github/languages/top/gustavoerivero/QuantaQueue" alt="project major language percent" />
 </div>
 
 <div align="center">
