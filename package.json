@@ -1,9 +1,10 @@
 {
   "name": "quantaqueue",
-  "version": "0.0.2",
-  "main": "src/main.ts",
-  "repository": "https://github.com/gustavoerivero/formulae.git",
-  "author": "<gustavoerivero12@gmail.com>",
+  "version": "0.0.3",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "repository": "https://github.com/gustavoerivero/QuantaQueue.git",
+  "author": "gustavoerivero",
   "license": "MIT",
   "private": false,
   "devDependencies": {
@@ -13,5 +14,8 @@
   },
   "dependencies": {
     "mathjs": "^11.8.1"
+  },
+  "scripts": {
+    "build": "tsc"
   }
 }

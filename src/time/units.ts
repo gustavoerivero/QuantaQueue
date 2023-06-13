@@ -1,4 +1,4 @@
-import { TTimeUnit } from '../interfaces'
+import { TimeUnit } from '../types'
 
 /**
  * Array of time units with their respective values in seconds.
@@ -21,7 +21,7 @@ import { TTimeUnit } from '../interfaces'
  * });
  * ```
  */
-const time: TTimeUnit[] = [
+const time: TimeUnit[] = [
   { id: 1, text: 'Nanosecond', value: 0.000000001 },
   { id: 2, text: 'Microsecond', value: 0.000001 },
   { id: 3, text: 'Millisecond', value: 0.001 },
