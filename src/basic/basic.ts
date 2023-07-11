@@ -14,11 +14,10 @@ import { evaluate, parse, round } from 'mathjs'
  * const inverse = Inverse(value); // 0.2
  * ```
  */
-export const Inverse = (val: number = 1, decimals: number = 4): number | null => {
+export const Inverse = (val: number = 1, decimals: number = 4): number => {
 
   if (val === 0) {
-    console.log("The parameter 'val' cannot be equal to 0.")
-    return null
+    throw Error(`The parameter 'val'cannot be equal to zero (0).`)
   }
 
   try {
@@ -26,8 +25,7 @@ export const Inverse = (val: number = 1, decimals: number = 4): number | null =>
     const inv = evaluate(exp)
     return round(Number(inv), decimals)
   } catch (error) {
-    console.log(`The parameter 'val' cannot be equal to 0: ${error}`)
-    return null
+    throw Error(`The parameter 'val' cannot be equal to 0: ${error}`)
   }
 
 }
@@ -46,7 +44,7 @@ export const Inverse = (val: number = 1, decimals: number = 4): number | null =>
  * const percentage = Percent(value); // "25%"
  * ```
  */
-export const Percent = (value: number = 0, decimals: number = 4): string | null => {
+export const Percent = (value: number = 0, decimals: number = 4): string => {
   try {
     if (value < 1) {
       const exp = `${value}*100`
@@ -58,8 +56,7 @@ export const Percent = (value: number = 0, decimals: number = 4): string | null 
       return `${round(res, decimals)}%`
     }
   } catch (error) {
-    console.log(`Error in convert value = '${value}' to percent: ${error}`)
-    return null
+    throw Error(`Error in convert value = '${value}' to percent: ${error}`)
   }
 }
 
@@ -81,14 +78,13 @@ export const Percent = (value: number = 0, decimals: number = 4): string | null 
  * const convertedValue = Convert(minutes, sourceUnit, targetUnit); // 0.5
  * ```
  */
-export const Convert = (timeUnit: number, variableTime: number, timeUnitVariable: number, decimals: number = 4): number | null => {
+export const Convert = (timeUnit: number, variableTime: number, timeUnitVariable: number, decimals: number = 4): number => {
   try {
     const exp = `(1/(${variableTime}*${timeUnitVariable}))*${timeUnit}`
     const res = evaluate(exp)
     return Number(round(res, decimals))
   } catch (error) {
-    console.log(`Calculate error: ${error}`)
-    return null
+    throw Error(`Calculate error: ${error}`)
   }
 }
 
@@ -110,7 +106,7 @@ export const Convert = (timeUnit: number, variableTime: number, timeUnitVariable
  * const result = Summation(lowerLimit, upperLimit, expression); // 35
  * ```
  */
-export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expression: string = 'n', decimals: number = 4): number | null => {
+export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expression: string = 'n', decimals: number = 4): number => {
 
   upperLimit = upperLimit ? upperLimit : 0
   expression = expression ? expression : 'n'
@@ -128,8 +124,7 @@ export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expres
     }
     return Number(round(sum, decimals))
   } catch (error) {
-    console.log(`Summation error: ${error}`)
-    return null
+    throw Error(`Summation error: ${error}`)
   }
 
 }
@@ -157,29 +152,31 @@ export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expres
  * const result = Rho(lambda, mu, serverSize); // 0.6667
  * ```
  */
-export const Rho = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number | null => {
+export const Rho = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
 
   serverSize = serverSize ? serverSize : 1
 
   try {
 
-    if (mu === 0 || serverSize === 0) {
-      console.log(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to 0.`)
-      return null
+    if (mu === 0) {
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+    }
+
+    if (serverSize <= 0) {
+      throw Error(`The parameter 'serverSize' cannot be equal to zero (0) or minor to one (serverSize < 1).`)
     }
 
     const exp = `${lambda}/(${mu}*${serverSize})`
     const rho = evaluate(exp)
+
     if (rho < 1) {
-      console.log(`The system stabilizes, i.e., converges to a number.`)
+      throw Error(`The system stabilizes, i.e., converges to a number.`)
     }
 
-    console.log(`System utilization factor or traffic intensity is the ${rho} The number of customers in the system increases without limit.`)
     return Number(round(rho, decimals))
 
   } catch (error) {
-    console.log(`System utilization factor error: ${error}`)
-    return null
+    throw Error(`System utilization factor error: ${error}`)
   }
 
 }

@@ -24,18 +24,19 @@ import { Rho } from '../../basic'
  */
 export const SSInitialProbability = (lambda: number = 0, mu: number = 1, decimals: number = 4): number | null => {
   try {
+
     if (mu === 0) {
-      console.log(`The parameter 'mu' cannot be equal to 0.`)
-      return null
+      throw Error(`The parameter 'mu' cannot be equal to 0.`)
     }
+
     const rho = Rho(lambda, mu, 1, 15)
     const exp = `1-${rho}`
     const p = evaluate(exp)
     return Number(round(p, decimals))
 
   } catch (error) {
-    console.log(`Single Server Initial Probability error: ${error}`)
-    return null
+    throw Error(`Single Server Initial Probability error: ${error}`)
+    
   }
 }
 
@@ -66,13 +67,13 @@ export const SSNProbability = (lambda: number = 0, mu: number = 1, iteration: nu
   const n = iteration
   try {
     if (mu === 0) {
-      console.log(`The parameter 'mu' cannot be equal to 0.`)
-      return null
+      throw Error(`The parameter 'mu' cannot be equal to 0.`)
     }
+
     if (n < 1) {
-      console.log(`The parameter 'n' cannot be lower than 1.`)
-      return null
+      throw Error(`The parameter 'n' cannot be lower than 1.`)
     }
+
     const rho = Rho(lambda, mu, 1, 15)
     const po = SSInitialProbability(lambda, mu, 15)
     const exp = `(${rho}^${n})*${po}`
@@ -80,8 +81,7 @@ export const SSNProbability = (lambda: number = 0, mu: number = 1, iteration: nu
     return Number(round(p, decimals))
 
   } catch (error) {
-    console.log(`Single Server n Probability error: ${error}`)
-    return null
+    throw Error(`Single Server n Probability error: ${error}`)
   }
 }
 
@@ -117,8 +117,7 @@ export const SSSClientEx = (lambda: number = 0, mu: number = 1, serverSize: numb
   try {
 
     if (mu === 0 || serverSize === 0) {
-      console.log(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to 0.`)
-      return null
+      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to 0.`)
     }
 
     if (serverSize === 1) {
@@ -131,8 +130,7 @@ export const SSSClientEx = (lambda: number = 0, mu: number = 1, serverSize: numb
     return 0
 
   } catch (error) {
-    console.log(`Expected value of the number of customers in the system error: ${error}`)
-    return null
+    throw Error(`Expected value of the number of customers in the system error: ${error}`)
   }
 
 }
@@ -169,8 +167,7 @@ export const SSQClientEx = (lambda: number = 0, mu: number = 1, serverSize: numb
   try {
 
     if (mu === 0 || serverSize === 0) {
-      console.log(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to 0.`)
-      return null
+      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to 0.`) 
     }
 
     if (serverSize === 1) {
@@ -183,8 +180,8 @@ export const SSQClientEx = (lambda: number = 0, mu: number = 1, serverSize: numb
     return 0
 
   } catch (error) {
-    console.log(`Expected value of the number of customers in the queue error: ${error}`)
-    return null
+    throw Error(`Expected value of the number of customers in the queue error: ${error}`)
+    
   }
 }
 
@@ -220,8 +217,7 @@ export const SSSTimeEx = (lambda: number = 0, mu: number = 1, serverSize: number
   try {
 
     if (mu === 0 || serverSize === 0) {
-      console.log(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to 0.`)
-      return null
+      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to 0.`)
     }
 
     if (serverSize === 1) {
@@ -232,8 +228,7 @@ export const SSSTimeEx = (lambda: number = 0, mu: number = 1, serverSize: number
     return 0
 
   } catch (error) {
-    console.log(`Average waiting time in the system error: ${error}`)
-    return null
+    throw Error(`Average waiting time in the system error: ${error}`)
   }
 
 }
@@ -270,8 +265,7 @@ export const SSQTimeEx = (lambda: number = 0, mu: number = 1, serverSize: number
   try {
 
     if (mu === 0 || serverSize === 0) {
-      console.log(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to 0.`)
-      return null
+      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to 0.`)
     }
 
     if (serverSize === 1) {
@@ -284,8 +278,7 @@ export const SSQTimeEx = (lambda: number = 0, mu: number = 1, serverSize: number
     return 0
 
   } catch (error) {
-    console.log(`Average waiting time in the queue error: ${error}`)
-    return null
+    throw Error(`Average waiting time in the queue error: ${error}`)
   }
 
 }
