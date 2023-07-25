@@ -149,7 +149,7 @@ export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expres
  * @param mu - The rate of clients served in the system (default: 1).
  * @param serverSize - The number of servers in the system (default: 1).
  * @param decimals - The number of decimal places to round the result (default: 4).
- * @returns The system utilization factor or traffic intensity as a number, or `null` if an error occurs during the calculation.
+ * @returns The system utilization factor or traffic intensity as a number.
  * 
  * @remarks
  * The system utilization factor, also known as traffic intensity, represents the average fraction of time that the system's servers are busy serving customers. It is calculated as the ratio of the customer arrival rate to the product of the service rate and the number of servers in the system.
