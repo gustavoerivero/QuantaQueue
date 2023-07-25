@@ -8,8 +8,8 @@ import { evaluate, round } from 'mathjs'
  * @returns {Number} The service cost.
  */
 export const ServiceCost = (serverCost: number = 0, serverSize: number = 1, decimals: number = 4): number => {
-  const Cs = serverCost
-  const s = serverSize
+  const Cs = serverCost ?? 0
+  const s = serverSize ?? 0
 
   try {
 

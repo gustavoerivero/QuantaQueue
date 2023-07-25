@@ -1,17 +1,20 @@
 import { evaluate, parse, round } from 'mathjs'
 
 /**
- * Calculates the multiplicative inverse of a number.
+ * Calculates the inverse of a number.
  * 
- * @param val - The number whose multiplicative inverse is to be calculated.
+ * @param val - The value for which the inverse is to be calculated (default: 1).
  * @param decimals - The number of decimal places to round the result (default: 4).
- * @returns The multiplicative inverse of the number, or `null` if an error occurs during the calculation.
+ * @returns The inverse of the specified value as a number.
+ * 
+ * @remarks
+ * The function calculates the inverse of a number by dividing 1 by the specified value.
  * 
  * @example
  * ```typescript
- * // Calculate the multiplicative inverse of 5
- * const value = 5;
- * const inverse = Inverse(value); // 0.2
+ * // Calculate the inverse of 2:
+ * const val = 2;
+ * const result = Inverse(val); // 0.5
  * ```
  */
 export const Inverse = (val: number = 1, decimals: number = 4): number => {
@@ -31,17 +34,20 @@ export const Inverse = (val: number = 1, decimals: number = 4): number => {
 }
 
 /**
- * Converts a number to its percentage form.
+ * Converts a number to a percentage format.
  * 
- * @param value - The value to be displayed as a percentage.
+ * @param value - The value to be converted to a percentage (default: 0).
  * @param decimals - The number of decimal places to round the result (default: 4).
- * @returns The number in its percentage form as a string, or `null` if an error occurs during the calculation.
+ * @returns The value converted to a percentage as a string.
+ * 
+ * @remarks
+ * The function converts a number to a percentage format by multiplying it by 100 or dividing it by 100, depending on the value.
  * 
  * @example
  * ```typescript
- * // Convert 0.25 to its percentage form
+ * // Convert 0.25 to a percentage:
  * const value = 0.25;
- * const percentage = Percent(value); // "25%"
+ * const result = Percent(value); // "25%"
  * ```
  */
 export const Percent = (value: number = 0, decimals: number = 4): string => {
@@ -69,6 +75,10 @@ export const Percent = (value: number = 0, decimals: number = 4): string => {
  * @param decimals - The number of decimal places to round the result (default: 4).
  * @returns The converted time value, or `null` if an error occurs during the calculation.
  * 
+ * @remarks
+ * The function converts a time value from one unit to another by using the formula:
+ * convertedValue = (1 / (variableTime * timeUnitVariable)) * timeUnit
+ * 
  * @example
  * ```typescript
  * // Convert 30 minutes to hours
@@ -89,27 +99,30 @@ export const Convert = (timeUnit: number, variableTime: number, timeUnitVariable
 }
 
 /**
- * Performs summation of a given expression.
+ * Calculates the summation of an expression over a range of values.
  * 
- * @param lowerLimit - The lower limit of the summation (default: 0).
- * @param upperLimit - The upper limit of the summation (default: 0).
- * @param expression - The expression to be iterated by the summation (default: 'n').
+ * @param lowerLimit - The lower limit of the summation range (default: 0).
+ * @param upperLimit - The upper limit of the summation range (default: 0).
+ * @param expression - The expression to be evaluated in each iteration of the summation (default: 'n').
  * @param decimals - The number of decimal places to round the result (default: 4).
- * @returns The result of the summation as a number, or `null` if an error occurs during the calculation.
+ * @returns The summation of the expression over the range of values as a number.
+ * 
+ * @remarks
+ * The function calculates the summation of an expression over a range of values, using the specified lower limit, upper limit, and expression. The expression can contain the variable 'n' which represents the current value in each iteration. The result is rounded to the specified number of decimal places.
  * 
  * @example
  * ```typescript
- * // Perform summation from 1 to 5 of the expression '2n + 1'
+ * // Calculate the summation of n^2 from 1 to 5:
  * const lowerLimit = 1;
  * const upperLimit = 5;
- * const expression = '2n + 1';
- * const result = Summation(lowerLimit, upperLimit, expression); // 35
+ * const expression = 'n^2';
+ * const result = Summation(lowerLimit, upperLimit, expression); // 55
  * ```
  */
 export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expression: string = 'n', decimals: number = 4): number => {
 
-  upperLimit = upperLimit ? upperLimit : 0
-  expression = expression ? expression : 'n'
+  upperLimit = upperLimit ?? 0
+  expression = expression ?? 'n'
 
   try {
     let sum: number = 0
@@ -154,7 +167,7 @@ export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expres
  */
 export const Rho = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
 
-  serverSize = serverSize ? serverSize : 1
+  serverSize = serverSize ?? 1
 
   try {
 

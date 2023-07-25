@@ -29,8 +29,8 @@ import { Rho, Summation } from '../../basic'
  * ```
  */
 export const MMSQtyServerBusy = (lambda: number = 0, mu: number = 1, serverSize: number = 1, iteration: number = 1, decimals: number = 4): number => {
-  const n = iteration
-  const s = serverSize
+  const n = iteration ?? 1
+  const s = serverSize ?? 1
   try {
 
     if (mu === 0 ) {
@@ -84,7 +84,7 @@ export const MMSQtyServerBusy = (lambda: number = 0, mu: number = 1, serverSize:
  * ```
  */
 export const MMSInitialProbability = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
-  const s = serverSize
+  const s = serverSize ?? 1
   try {
 
     if (mu === 0 ) {
@@ -142,12 +142,12 @@ export const MMSInitialProbability = (lambda: number = 0, mu: number = 1, server
  * ```
  */
 export const MMSNProbability = (lambda: number = 0, mu: number = 1, serverSize: number = 1, iteration: number = 0, decimals: number = 4): number => {
-  const n = iteration
-  const s = serverSize
+  const n = iteration ?? 1
+  const s = serverSize ?? 1
   try {
 
-    if (mu <= 0 ) {
-      throw Error(`The parameter 'mu' cannot be equal to or less than zero (0).`)
+    if (mu === 0 ) {
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
     }
 
     if (s <= 0) {
@@ -207,16 +207,19 @@ export const MMSNProbability = (lambda: number = 0, mu: number = 1, serverSize: 
  */
 export const MMSQClientEx = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
 
-  serverSize = serverSize ? serverSize : 1
+  const s = serverSize ?? 1
   try {
-
-    if (mu <= 0 || serverSize <= 0) {
-      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to or less than 0.`)
+    
+    if (mu === 0 ) {
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
     }
 
-    const rho = Rho(lambda, mu, serverSize, 15)
-    const po = MMSInitialProbability(lambda, mu, serverSize, 15)
-    const s = serverSize
+    if (s <= 0) {
+      throw Error(`The parameter 'serverSize' cannot be equal to zero (0) or minor to one (serverSize < 1).`)
+    }
+
+    const rho = Rho(lambda, mu, s, 15)
+    const po = MMSInitialProbability(lambda, mu, s, 15)
 
     const exp = `((${po}*((${lambda}/${mu})^${s}))/(${s}!*((1-${rho})^2))*(${rho}))`
 
@@ -238,14 +241,19 @@ export const MMSQClientEx = (lambda: number = 0, mu: number = 1, serverSize: num
  */
 export const MMSSClientEx = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
 
-  serverSize = serverSize ? serverSize : 1
+  const s = serverSize ?? 1
 
   try {
-
-    if (mu <= 0 || serverSize <= 0) {
-      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to or less than 0.`)
+    
+    if (mu === 0 ) {
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
     }
-    const Lq = MMSQClientEx(lambda, mu, serverSize, 15)
+
+    if (s <= 0) {
+      throw Error(`The parameter 'serverSize' cannot be equal to zero (0) or minor to one (serverSize < 1).`)
+    }
+
+    const Lq = MMSQClientEx(lambda, mu, s, 15)
     const exp = `${Lq}+(${lambda}/${mu})`
     const Ls = evaluate(exp)
     return Number(round(Ls, decimals))
@@ -265,14 +273,19 @@ export const MMSSClientEx = (lambda: number = 0, mu: number = 1, serverSize: num
  */
 export const MMSQTimeEx = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
 
-  serverSize = serverSize ? serverSize : 1
+  const s = serverSize ?? 1
 
   try {
 
-    if (mu <= 0 || serverSize <= 0) {
-      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to or less than 0.`)
+    if (mu === 0 ) {
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
     }
-    const Lq = MMSQClientEx(lambda, mu, serverSize, 15)
+
+    if (s <= 0) {
+      throw Error(`The parameter 'serverSize' cannot be equal to zero (0) or minor to one (serverSize < 1).`)
+    }
+
+    const Lq = MMSQClientEx(lambda, mu, s, 15)
     const exp = `${Lq}/${lambda}`
     const Wq = evaluate(exp)
     return Number(round(Wq, decimals))
@@ -313,14 +326,19 @@ export const MMSQTimeEx = (lambda: number = 0, mu: number = 1, serverSize: numbe
  */
 export const MMSSTimeEx = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
 
-  serverSize = serverSize ? serverSize : 1
+  const s = serverSize ?? 1
 
   try {
-
-    if (mu <= 0 || serverSize <= 0) {
-      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to or less than 0.`)
+   
+    if (mu === 0 ) {
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
     }
-    const Wq = MMSQTimeEx(lambda, mu, serverSize, 15)
+
+    if (s <= 0) {
+      throw Error(`The parameter 'serverSize' cannot be equal to zero (0) or minor to one (serverSize < 1).`)
+    }
+
+    const Wq = MMSQTimeEx(lambda, mu, s, 15)
     const exp = `${Wq}+(1/${mu})`
     const Ws = evaluate(exp)
     return Number(round(Ws, decimals))
@@ -366,15 +384,19 @@ export const MMSSTimeEx = (lambda: number = 0, mu: number = 1, serverSize: numbe
  */
 export const MMSSystemTimeProbability = (time: number = 0, lambda: number = 1, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
 
-  serverSize = serverSize ? serverSize : 1
+  const s = serverSize ?? 1
 
   try {
 
-    if (mu <= 0 || serverSize <= 0) {
-      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to or less than 0.`)
+    if (mu === 0 ) {
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
     }
 
-    const exp = `(e^(-${mu}*${time}))*(1+((${MMSInitialProbability(lambda, mu, serverSize, 15)}*((${lambda}/${mu})^${serverSize}))/((${serverSize}!)*(1-${Rho(lambda, mu, serverSize, 15)})))*((1-(e^(-${mu}*${time}*(${serverSize}-1-(${lambda}/${mu})))))/(${serverSize}-1-(${lambda}/${mu}))))`
+    if (s <= 0) {
+      throw Error(`The parameter 'serverSize' cannot be equal to zero (0) or minor to one (serverSize < 1).`)
+    }
+
+    const exp = `(e^(-${mu}*${time}))*(1+((${MMSInitialProbability(lambda, mu, s, 15)}*((${lambda}/${mu})^${s}))/((${s}!)*(1-${Rho(lambda, mu, s, 15)})))*((1-(e^(-${mu}*${time}*(${s}-1-(${lambda}/${mu})))))/(${s}-1-(${lambda}/${mu}))))`
 
     const p = evaluate(exp)
     return round(p, decimals)
@@ -385,28 +407,56 @@ export const MMSSystemTimeProbability = (time: number = 0, lambda: number = 1, m
 }
 
 /**
- * Method for calculating the probability of zero queue waiting time.
- * @param {Number} lambda Customer arrival rate to the system. Default is 1.
- * @param {Number} mu Rate of clients served in the system. Default is 1.
- * @param {Number} serverSize Number of servers. Default is 1.
- * @param {Number} decimals Decimals to which you want to shorten the number. Default is 4.
- * @returns {Number} Probability of zero queue waiting time.
+ * Calculates the probability of zero queue time in a M/M/s model.
+ * 
+ * @param lambda - The customer arrival rate to the system (default: 0).
+ * @param mu - The rate of clients served in the system (default: 1).
+ * @param serverSize - The number of servers in the system (default: 1).
+ * @param decimals - The number of decimal places to round the result (default: 4).
+ * @returns The probability of zero queue time as a number.
+ * 
+ * @remarks
+ * The M/M/s model represents a queuing system with a Poisson arrival rate (lambda), an exponential service rate (mu), and s servers. The method calculates the probability of zero queue time, considering the number of servers and the arrival and service rates.
+ * 
+ * The formula used to calculate the probability of zero queue time is:
+ * P(0) = 1 / (1 + ((Lq * ((lambda/mu)^s)) / (s! * (1 - rho)))))
+ * 
+ * Where:
+ * - Lq: The expected value of the number of customers in the queue, calculated using the MMSInitialProbability and MMSNProbability methods.
+ * - lambda: The customer arrival rate to the system.
+ * - mu: The rate of clients served in the system.
+ * - serverSize: The number of servers in the system.
+ * - rho: The system utilization factor, calculated using the Rho method.
+ * 
+ * @example
+ * ```typescript
+ * // Calculate the probability of zero queue time for a M/M/s model with the following parameters:
+ * const lambda = 0.5; // customer arrival rate per unit time
+ * const mu = 2; // service rate per unit time
+ * const serverSize = 3; // number of servers in the system
+ * const result = MMSProbabilityZeroQueueTime(lambda, mu, serverSize); // 0.1399
+ * ```
  */
 export const MMSProbabilityZeroQueueTime = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
 
-  const s = serverSize ? serverSize : 1
+  const s = serverSize ?? 1
 
   try {
-    if (mu <= 0 || s <= 0) {
-      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to or less than 0.`)
+
+    if (mu === 0 ) {
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
     }
 
-    let pZero = MMSInitialProbability(lambda, mu, serverSize, 15)
+    if (s <= 0) {
+      throw Error(`The parameter 'serverSize' cannot be equal to zero (0) or minor to one (serverSize < 1).`)
+    }
+
+    let pZero = MMSInitialProbability(lambda, mu, s, 15)
     const upperLimit = Number(s - 1)
 
     if (upperLimit > 0) {
       for (let i = 1; i <= upperLimit; i++) {
-        pZero = pZero + MMSNProbability(lambda, mu, serverSize, i, 15)
+        pZero = pZero + MMSNProbability(lambda, mu, s, i, 15)
       }
     }
 
@@ -418,26 +468,57 @@ export const MMSProbabilityZeroQueueTime = (lambda: number = 0, mu: number = 1, 
 }
 
 /**
- * Method for calculating the probability of time spent in the queue.
- * @param {Number} time Time to be used to calculate the probability.
- * @param {Number} lambda Customer arrival rate to the system. Default is 1.
- * @param {Number} mu Rate of clients served in the system. Default is 1.
- * @param {Number} serverSize Number of servers. Default is 1.
- * @param {Number} decimals Decimals to which you want to shorten the number. Default is 4.
- * @returns {Number} Probability of time spent in the queue.
+ * Calculates the probability of queue time greater than a specified value in a M/M/s model.
+ * 
+ * @param time - The time threshold for which the probability is to be calculated (default: 0).
+ * @param lambda - The customer arrival rate to the system (default: 0).
+ * @param mu - The rate of clients served in the system (default: 1).
+ * @param serverSize - The number of servers in the system (default: 1).
+ * @param decimals - The number of decimal places to round the result (default: 4).
+ * @returns The probability of queue time greater than the specified value as a number.
+ * 
+ * @remarks
+ * The M/M/s model represents a queuing system with a Poisson arrival rate (lambda), an exponential service rate (mu), and s servers. The method calculates the probability of queue time greater than a specified value, considering the number of servers and the arrival and service rates.
+ * 
+ * The formula used to calculate the probability of queue time greater than a specified value is:
+ * P(time > t) = ((1 - P(0)) * (e^(-s * mu * (1 - rho) * time)))
+ * 
+ * Where:
+ * - P(0): The probability of zero queue time, calculated using the MMSProbabilityZeroQueueTime method.
+ * - time: The time threshold for which the probability is to be calculated.
+ * - lambda: The customer arrival rate to the system.
+ * - mu: The rate of clients served in the system.
+ * - serverSize: The number of servers in the system.
+ * - rho: The system utilization factor, calculated using the Rho method.
+ * 
+ * @example
+ * ```typescript
+ * // Calculate the probability of queue time greater than 3 units of time in the system for a M/M/s model with the following parameters:
+ * const time = 3; // time threshold in the system
+ * const lambda = 0.5; // customer arrival rate per unit time
+ * const mu = 2; // service rate per unit time
+ * const serverSize = 3; // number of servers in the system
+ * const result = MMSProbabilityQueueTime(time, lambda, mu, serverSize); // 0.4457
+ * ```
  */
 export const MMSProbabilityQueueTime = (time: number = 0, lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
-  const s = serverSize ? serverSize : 1
+  
+  const s = serverSize ?? 1
 
   try {
-    if (mu <= 0 || s <= 0) {
-      throw Error(`The parameter '${mu === 0 ? 'mu' : 'server size'}' cannot be equal to or less than 0.`)
+
+    if (mu === 0 ) {
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
     }
 
-    const pZero = MMSProbabilityZeroQueueTime(lambda, mu, serverSize, 15)
-    const rho = Rho(lambda, mu, serverSize, 15)
+    if (s <= 0) {
+      throw Error(`The parameter 'serverSize' cannot be equal to zero (0) or minor to one (serverSize < 1).`)
+    }
 
-    const exp = `((1-${pZero})*(e^(-${serverSize}*${mu}*(1-${rho})*${time})))`
+    const pZero = MMSProbabilityZeroQueueTime(lambda, mu, s, 15)
+    const rho = Rho(lambda, mu, s, 15)
+
+    const exp = `((1-${pZero})*(e^(-${s}*${mu}*(1-${rho})*${time})))`
 
     const pQ1 = evaluate(exp)
     return round(pQ1, decimals)
