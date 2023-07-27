@@ -22,6 +22,18 @@
 
 QuantaQueue is a TypeScript library that provides a simplified approach to queueing theory operations. Developed from the powerful Math.js library, it offers a comprehensive set of methods and functions for performing accurate and efficient mathematical calculations. With QuantaQueue, developers can take advantage of the available functions to quickly perform complex calculations related to queuing systems, such as probability, throughput and waiting times.
 
+## Documentation
+
+| **_Index_**     | **Definition**                                                                            |
+|-----------------|-------------------------------------------------------------------------------------------|
+| _Types_         | The types of variables handled in the library.                                            |
+| _Time units_    | An array with the available time units.                                                   |
+| _Basic_         | The basic functions that will be used by all other functions.                             |
+| _Single server_ | Different models of a single server (M/M/1, M/M/1/k and M/G/1).                                                      |
+| _Multi server_  | Different models of multiservers (M/M/s and M/M/s/k).                                                         |
+| _General_       | Functions that group all models and execute the model according to a specified parameter. |
+| _Cost_          | Functions to calculate the costs of certain models.                                       |
+
 ## Installation
 
 To install the library, you can use the different package managers:

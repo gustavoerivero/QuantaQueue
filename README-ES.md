@@ -22,9 +22,21 @@
 
 QuantaQueue es una librería de TypeScript que provee un enfoque simplificado de las operaciones de la teoría de colas. Desarrollada a partir de la potente librería [Math.js](https://mathjs.org/), ofrece un completo conjunto de métodos y funciones para realizar cálculos matemáticos precisos y eficientes. Con QuantaQueue, los desarrolladores pueden aprovechar las funciones disponibles para realizar rápidamente cálculos complejos relacionados con los sistemas de colas, como la probabilidad, el rendimiento y los tiempos de espera.
 
+## Documentación
+
+| **_Índice_**           | **Definición**                                                                       |
+|------------------------|--------------------------------------------------------------------------------------|
+| _Tipos_                | Tipos de variables manejados en la librería.                                         |
+| _Unidades de tiempo_   | Un arreglo con las unidades de tiempo disponibles.                                   |
+| _Básicos_              | Funciones básicas que serán utilizadas en todos los modelos.                         |
+| _Único servidor_       | Modelos de un solo servidor (M/M/1, M/M/1/k y M/G/1).                                |
+| _Múltiples servidores_ | Modelos de múltiples servidores (M/M/s y M/M/s/k).                                   |
+| _General_              | Funciones que agrupan y ejecutan el modelo acorde al parámetro "model" especificado. |
+| _Costo_                | Funciones para calcular los costos de ciertos modelos.                               |                                 |
+
 ## Instalación
 
-To install the library, you can use the different package managers:
+Para instalar la librería, puedes usar diferentes manejadores de paquetes:
 
 ### NPM
 
