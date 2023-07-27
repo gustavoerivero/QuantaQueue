@@ -46,6 +46,102 @@ export const MMSKNLambda = (lambda: number = 0, iteration: number = 0, limit: nu
 }
 
 /**
+ * Calculates the quantity of servers busy (c) for a given M/M/s/k model at a specific iteration (n).
+ *
+ * @param lambda - The arrival rate (default: 0).
+ * @param mu - The service rate (default: 1).
+ * @param serverSize - The number of servers in the system (default: 1).
+ * @param iteration - The current iteration (default: 1).
+ * @param limit - The maximum iteration (default: 1).
+ * @param decimals - The number of decimal places to round the result (default: 4).
+ * @returns The quantity of servers busy (c) as a number.
+ *
+ * @remarks
+ * The M/M/s/k model represents a queuing system with a Poisson arrival rate (lambda), an exponential service rate (mu), s servers, and k classes of customers. The method calculates the quantity of servers busy (c) at a specific iteration (n), considering the number of servers, the classes of customers, and the arrival rate.
+ *
+ * The formula used to calculate the quantity of servers busy (c) for a given M/M/s/k model at a specific iteration (n) is:
+ *
+ * If (n <= s):
+ * c = (1/mu)^n / n!
+ *
+ * If (n <= k):
+ * c = (((l/mu)^s) / (s!)) * (((l / (mu * s))^(n - s))) - ((l/mu)^n) / (s! * s^(n - s))
+ *
+ * Otherwise:
+ * c = 0
+ *
+ * Where:
+ * - lambda: The arrival rate (customer arrival rate per unit time).
+ * - mu: The service rate (customer service rate per unit time).
+ * - serverSize: The number of servers in the system.
+ * - iteration: The current iteration.
+ * - limit: The maximum iteration.
+ * - decimals: The number of decimal places to round the result.
+ *
+ * @example
+ * ```typescript
+ * // Calculate the quantity of servers busy (c) for a M/M/s/k model with the following parameters:
+ * const lambda = 0.5; // customer arrival rate per unit time
+ * const mu = 0.2; // customer service rate per unit time
+ * const serverSize = 2; // number of servers in the system
+ * const iteration = 3; // current iteration
+ * const limit = 5; // maximum iteration
+ * const decimals = 4; // number of decimal places to round the result
+ * const result = MMSKQtyServerBusy(lambda, mu, serverSize, iteration, limit, decimals); // 0.0012
+ * ```
+ */
+export const MMSKQtyServerBusy = (lambda: number = 0, mu: number = 1, serverSize: number = 1, iteration: number = 1, limit: number = 1, decimals: number = 4): number => {
+  const n = iteration
+  const s = serverSize
+  const k = limit
+  const l = MMSKNLambda(lambda, n, k, 15)
+  try {
+
+    
+    if (mu === 0) {
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+    }
+
+    if (s === 0) {
+      throw Error(`The parameter 'serverSize' cannot be equal to zero (0).`)
+    }
+
+    if (k === 0) {
+      throw Error(`The parameter 'limit' cannot be equal to zero (0).`)
+    }
+
+    if (k < s) {
+      throw Error(`The parameter 'limit' ${k} cannot be lower than the server size ${s}.`)
+    }
+
+    if (n < 0) {
+      throw Error(`The parameter 'iteration' cannot be lower than zero (0).`)
+    }
+
+    if (n <= s) {
+
+      const exp = `((1/${mu})^${n})/(${n}!)`
+      const c = evaluate(exp)
+      return Number(round(c, decimals))
+
+    } else if (n <= k) {
+
+      const exp = `((((${l}/${mu})^${s})/(${s}!))*((${l}/(${mu}*${s}))^(${n}-${s})))-((${l}/${mu})^${n})/(${s}!*${s}^(${n}-${s}))`
+      const c = evaluate(exp)
+      return Number(round(c, decimals))
+
+    } else {
+
+      return Number(0)
+
+    }
+
+  } catch (error) {
+    throw Error(`M/M/s/k Quantity of Servers Busy error: ${error}`)
+  }
+}
+
+/**
  * Calculates the initial probability for a M/M/s/k model.
  *
  * @param lambda - The arrival rate (default: 0).
@@ -491,7 +587,6 @@ export const MMSKQTimeEx = (lambda: number = 0, mu: number = 1, serverSize: numb
  * const result = MMSKSTimeEx(lambda, mu, serverSize, limit, decimals); // 1.2821
  * ```
  */
-
 export const MMSKSTimeEx = (lambda: number = 0, mu: number = 1, serverSize: number = 1, limit: number = 1, decimals: number = 4): number => {
   
   const s = serverSize ?? 1
@@ -565,7 +660,6 @@ export const MMSKSTimeEx = (lambda: number = 0, mu: number = 1, serverSize: numb
  * const result = MMSKLostLambda(lambda, mu, serverSize, limit, decimals); // 0.8941
  * ```
  */
-
 export const MMSKLostLambda = (lambda: number = 0, mu: number = 1, serverSize: number = 1, limit: number = 1, decimals: number = 4): number => {
   
   const s = serverSize ?? 1

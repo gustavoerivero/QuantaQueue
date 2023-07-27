@@ -1,4 +1,5 @@
 import { evaluate, round } from 'mathjs'
+import { STimeEx } from '../General'
 
 /**
  * Method for calculating the cost of service. Returns the value according to the ECs model.
@@ -35,7 +36,14 @@ export const ServiceCost = (serverCost: number = 0, serverSize: number = 1, deci
  */
 export const WaitingCost = (waitingCost: number = 0, model: number = 1, lambda: number = 0, mu: number = 1, serverSize: number = 1, variance: number = 0, limit: number = 0, decimals: number = 4): number => {
   try {
-    const L = lambda * STimeEx(model, lambda, mu, serverSize, variance, limit, 15)
+
+    const { result } = STimeEx(model, lambda, mu, serverSize, variance, limit, 15)
+
+    if (!result) {
+      throw Error(`System Time must be exist... STimeEx = ${result}.`)
+    }
+
+    const L = lambda * result
 
     const exp = `${waitingCost}*${L}`
     const ECw = evaluate(exp)

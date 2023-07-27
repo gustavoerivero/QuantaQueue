@@ -1,9 +1,23 @@
 {
   "name": "quantaqueue",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "repository": "https://github.com/gustavoerivero/QuantaQueue.git",
+  "keywords": [
+    "Operations",
+    "Research",
+    "Operations Research",
+    "Queue",
+    "Theory",
+    "Queue Theory",
+    "mathjs",
+    "Typescript"
+  ],
+  "homepage": "https://github.com/gustavoerivero/QuantaQueue#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gustavoerivero/QuantaQueue.git"
+  },
   "author": "gustavoerivero",
   "license": "MIT",
   "private": false,
