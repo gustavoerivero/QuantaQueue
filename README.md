@@ -26,13 +26,13 @@ QuantaQueue is a TypeScript library that provides a simplified approach to queue
 
 | **_Index_**     | **Definition**                                                                            |
 |-----------------|-------------------------------------------------------------------------------------------|
-| _Types_         | The types of variables handled in the library.                                            |
-| _Time units_    | An array with the available time units.                                                   |
-| _Basic_         | The basic functions that will be used by all other functions.                             |
-| _Single server_ | Different models of a single server (M/M/1, M/M/1/k and M/G/1).                                                      |
-| _Multi server_  | Different models of multiservers (M/M/s and M/M/s/k).                                                         |
-| _General_       | Functions that group all models and execute the model according to a specified parameter. |
-| _Cost_          | Functions to calculate the costs of certain models.                                       |
+| _[Types](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/types/README.md)_         | The types of variables handled in the library.                                            |
+| _[Time units](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/time/README.md)_    | An array with the available time units.                                                   |
+| _[Basic](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/basic/README.md)_         | The basic functions that will be used by all other functions.                             |
+| _[Single server](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/SingleServer/README.md)_ | Different models of a single server (M/M/1, M/M/1/k and M/G/1).                                                      |
+| _[Multi server](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/MultiServer/README.md)_  | Different models of multiservers (M/M/s and M/M/s/k).                                                         |
+| _[General](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/General/README.md)_       | Functions that group all models and execute the model according to a specified parameter. |
+| _[Cost](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/Cost/README.md)_          | Functions to calculate the costs of certain models.                                       |
 
 ## Installation
 
