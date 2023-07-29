@@ -183,7 +183,7 @@ export const Rho = (lambda: number = 0, mu: number = 1, serverSize: number = 1, 
     const rho = evaluate(exp)
 
     if (rho < 1) {
-      throw Error(`The system stabilizes, i.e., converges to a number.`)
+      console.log(`The system stabilizes, i.e., converges to a number.`)
     }
 
     return Number(round(rho, decimals))
