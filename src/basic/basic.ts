@@ -35,29 +35,42 @@ export const Inverse = (val: number = 1, decimals: number = 4): number => {
 
 /**
  * Converts a number to a percentage format.
- * 
+ *
  * @param value - The value to be converted to a percentage (default: 0).
+ * @param total - The total value used for conversion (default: 100).
+ * @param type - The conversion type. If true, the value is multiplied by the total; if false, the value is divided by the total; if "MULTIPLY", the value is multiplied by the total; if "DIVISION", the value is divided by the total. (default: true).
  * @param decimals - The number of decimal places to round the result (default: 4).
  * @returns The value converted to a percentage as a string.
- * 
+ *
  * @remarks
- * The function converts a number to a percentage format by multiplying it by 100 or dividing it by 100, depending on the value.
- * 
+ * The function converts a number to a percentage format by multiplying it by 100 or dividing it by 100, depending on the `type` parameter. The `total` parameter is used as the divisor or multiplicand in the conversion.
+ *
  * @example
  * ```typescript
- * // Convert 0.25 to a percentage:
+ * // Convert 0.25 to a percentage using multiplication:
  * const value = 0.25;
  * const result = Percent(value); // "25%"
+ *
+ * // Convert 50 to a percentage using division:
+ * const number = 50;
+ * const result = Percent(number, 200, false); // "25%"
  * ```
  */
-export const Percent = (value: number = 0, decimals: number = 4): string => {
+export const Percent = (value: number = 0, total: number = 100, type: boolean | "MULTIPLY" | "DIVISION" = true, decimals: number = 4): string => {
   try {
-    if (value < 1) {
-      const exp = `${value}*100`
+
+    if (total === 0) {
+      throw Error(`The parameter 'total' cannot be equal to zero (0).`)
+    }
+
+    type = type && typeof type === "string" && type === "MULTIPLY"
+
+    if (type) {
+      const exp = `${value}*${total}`
       const res = evaluate(exp)
       return `${round(res, decimals)}%`
     } else {
-      const exp = `${value}/100`
+      const exp = `(${value}/${total})*100`
       const res = evaluate(exp)
       return `${round(res, decimals)}%`
     }
