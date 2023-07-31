@@ -129,7 +129,7 @@ Depending on the value of the ```type``` parameter.
 
 ## Convert
 
-The ```Convert``` function converts a time value from one unit to another. 
+The ```Convert``` function converts a time value from one unit to another.
 
 *Note*: It is recommended to use the [```time```](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/time/README.md) variable provided by the library.
 
@@ -263,3 +263,66 @@ The ```Summation``` function calculates the sum of the values in the range by ad
 
 ## Rho
 
+The ```Rho``` function calculates the system utilization factor or traffic intensity. This factor indicates the proportion of time the queuing system is busy.
+
+### Parameters
+
+The ```Rho``` function has four parameters:
+
+- ```lambda```: The rate at which customers arrive at the system. The default value is 0.
+- ```mu```: The rate of customers served in the system. The default value is 1.
+- ```serverSize```: The number of servers in the system. The default value is 1.
+- ```decimals```: The number of decimals to round the result to. The default value is 4.
+
+### Return
+
+The ```Rho``` function returns the system utilization factor or traffic intensity as a number.
+
+### Errors
+
+The ```Rho``` function may throw the following errors:
+
+- ```Error```: If the ```lambda``` variable does not have a numeric value.
+- ```Error```: If the variable ```mu``` does not have a numeric value.
+- ```Error```: If the variable ```serverSize``` does not have a numeric value.
+- ```Error```: If the variable ````decimals``` does not have a numeric value.
+- ```Error```: If the variable ```mu``` is equal to 0.
+- ```Error```: If the variable ```serverSize``` is equal to 0.
+
+### Example
+
+The following code calculates the system utilization factor for a system with the following parameters:
+
+```typescript
+const lambda = 10;
+const mu = 5;
+const serverSize = 3;
+
+const result = Rho(lambda, mu, serverSize); // 0.6667
+```
+
+### Mathematical explanation
+
+The system utilization factor, also known as traffic intensity, represents the average fraction of time that the system's servers are busy serving customers. It is calculated as the ratio of the customer arrival rate to the product of the service rate and the number of servers in the system.
+
+The system utilization factor indicates the level of system congestion or activity. A value less than 1 indicates that the system is stable and the number of customers in the system will not grow indefinitely. However, a value greater than 1 suggests that the system is overloaded and the number of customers will increase without limit.
+
+Generally, the utilization factor is required to be less than one. Its formula is given by:
+
+```matlab
+Rho = lambda / (serverSize * mu)
+```
+
+Where:
+
+- ```lambda```: Average rate of client arrivals to the system.
+- ```mu```: Average rate of clients served in the system.
+- ```serverSize```: Number of servers in the system.
+
+Therefore:
+
+- If ```Rho > 1```: The system is overcrowded most of the time, i.e., the queue is permanently growing.
+- Yes ```Rho < 1```: The system is stable.
+- If ```Rho = 1```: The system is relentlessly serving but not letting the queue grow.
+
+For example, if ```Rho = 0.9```, it indicates that 90% of the time the queuing system is busy and 10% of the time it is not.

@@ -264,3 +264,67 @@ donde:
 La función ```Summation``` calcula la suma de los valores en el rango sumando los valores uno por uno.
 
 ## Rho
+
+La función ```Rho``` calcula el factor de utilización del sistema o intensidad de tráfico. Este factor indica la proporción de tiempo en el que él sistema de colas está ocupado.
+
+### Parámetros
+
+La función ```Rho``` tiene cuatro parámetros:
+
+- ```lambda```: La tasa de llegada de clientes al sistema. El valor predeterminado es 0.
+- ```mu```: La tasa de clientes servidos en el sistema. El valor predeterminado es 1.
+- ```serverSize```: El número de servidores en el sistema. El valor predeterminado es 1.
+- ```decimals```: El número de decimales a los que se va a redondear el resultado. El valor predeterminado es 4.
+
+### Retorno
+
+La función ```Rho``` devuelve el factor de utilización del sistema o intensidad de tráfico como un número.
+
+### Errores
+
+La función ```Rho``` puede arrojar los siguientes errores:
+
+- ```Error```: Si la variable ```lambda``` no tiene un valor numérico.
+- ```Error```: Si la variable ```mu``` no tiene un valor numérico.
+- ```Error```: Si la variable ```serverSize``` no tiene un valor numérico.
+- ```Error```: Si la variable ```decimals``` no tiene un valor numérico.
+- ```Error```: Si la variable ```mu``` es igual a 0.
+- ```Error```: Si la variable ```serverSize``` es igual a 0.
+
+### Ejemplo de uso
+
+El siguiente código calcula el factor de utilización del sistema para un sistema con los siguientes parámetros:
+
+```typescript
+const lambda = 10;
+const mu = 5;
+const serverSize = 3;
+
+const result = Rho(lambda, mu, serverSize); // 0.6667
+```
+
+### Explicación matemática
+
+El factor de utilización del sistema, también conocido como intensidad de tráfico, representa la fracción promedio de tiempo que los servidores del sistema están ocupados atendiendo clientes. Se calcula como la relación entre la tasa de llegada de clientes y el producto de la tasa de servicio y el número de servidores en el sistema.
+
+El factor de utilización del sistema indica el nivel de congestión o actividad del sistema. Un valor menor que 1 indica que el sistema es estable y el número de clientes en el sistema no crecerá indefinidamente. Sin embargo, un valor mayor que 1 sugiere que el sistema está sobrecargado y el número de clientes aumentará sin límite.
+
+Generalmente se requiere que el factor de utilización sea menor a uno. Su fórmula está dada por:
+
+```matlab
+Rho = lambda / (serverSize * mu)
+```
+
+Donde:
+
+- ```lambda```: Tasa media de llegadas de clientes al sistema.
+- ```mu```: Tasa media de clientes servidos en el sistema.
+- ```serverSize```: Cantidad de servidores en el sistema.
+
+Por lo tanto:
+
+- Sí ```Rho > 1```: El sistema está sobre copado la mayor parte del tiempo, es decir, la cola está creciendo permanentemente.
+- Sí ```Rho < 1```: El sistema es estable.
+- Sí ```Rho = 1```: El sistema se encuentra atendiendo sin descanso pero sin dejar que la cola crezca.
+
+Por ejemplo, si ```Rho = 0.9```, indica que el 90% del tiempo el sistema de colas está ocupado y que, el 10% del tiempo no lo está.
