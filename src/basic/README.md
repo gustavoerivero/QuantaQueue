@@ -17,9 +17,9 @@ Among these formulas are:
 |---------------|---------------------------------------------------------------------------|
 | _[Inverse](#inverse)_     | Calculates the inverse of a given number.                                     |
 | _[Percent](#percent)_  | Calculates the percentage of a number.                                       |
-| _Convert_ | Transforms a given unit of time into another.                             |
-| _Summation_   | Calculates the sum of an expression.                                    |
-| _Rho_         | Calculates the system utilization factor or traffic intensity. |
+| _[Convert](#convert)_ | Transforms a given unit of time into another.                             |
+| _[Summation](#summation)_   | Calculates the sum of an expression.                                    |
+| _[Rho](#rho)_         | Calculates the system utilization factor or traffic intensity. |
 
 ## Inverse
 
@@ -116,13 +116,81 @@ const result = Percent(value, total, false); // "25%"
 The ```Percent``` function converts a number to a percentage by formatting it as:
 
 ```matlab
-num * total * 100%
+Percent(num, total, true) = num * total%
 ```
 
 or
 
 ```matlab
-num / total * 100%
+Percent(num, total, false) = num / total * 100%
 ```
 
 Depending on the value of the ```type``` parameter.
+
+## Convert
+
+The ```Convert``` function converts a time value from one unit to another. It is recommended to use the ```time``` variable provided by the library.
+
+The ```Convert``` function has four parameters:
+
+- ```sourceValue```: The value of the time to convert.
+- ```sourceUnit```: The source time unit.
+- ```targetUnit```: The target time unit.
+- ```decimals```: The number of decimals to round the result to. The default value is 4.
+
+### Return
+
+The ```Convert``` function returns the value converted to the specified time unit as a number.
+
+### Errors
+
+The ```Convert``` function may throw the following errors:
+
+- ```Error```: If the ```sourceUnit``` variable does not have a numeric value.
+- ```Error```: If the variable ```sourceValue`` does not have a numeric value.
+- ```Error```: If the ```targetUnit``` variable does not have a numeric value.
+- ```Error```: If the variable ```sourceValue`` is equal to zero.
+- ```Error```: If the ```sourceUnit``` variable is equal to zero.
+
+### Example
+
+The following code converts 30 minutes to hours:
+
+```typescript
+import { time, Convert } from "quantaqueue".
+
+const minutes = 30;
+const sourceUnit = time.find(unit => unit.text === 'Minute')!.value; // 60 (seconds)
+const targetUnit = time.find(unit => unit.text === 'Hour')!.value; // 3600 (seconds)
+const convertedValue = Convert(minutes, sourceUnit, targetUnit); // 0.5
+```
+
+### Mathematical explanation
+
+The ```Convert``` function converts a time value from one unit to another using the following formula:
+
+```matlab
+convertedValue = (1 / (sourceValue * sourceUnit)) * targetUnit
+```
+
+where:
+
+- ```sourceValue```: The value of the time to convert.
+- ```sourceUnit```: The source time unit.
+- ```targetValue```: The target time unit.
+
+For example, to convert 30 minutes to hours, the following formula would be used:
+
+```matlab
+convertedValue = (1 / (30 * 60)) * 3600
+```
+
+This would result in a converted value of ```0.5```, which is equivalent to 30 minutes in hours.
+
+Now, the first part of the formula, ```1 / (sourceValue * sourceUnit)```, represents the number of times the source time unit is contained in the target time unit. For example, 60 minutes are contained in 1 hour a total of 60 times.
+
+The second part of the formula, ```* targetUnit```, represents the value of the target time unit. For example, the value of 1 hour is 3600 seconds.
+
+The product of these two parts of the formula is the converted value, which is the number of target time units that equal the source time value.
+
+## Summation

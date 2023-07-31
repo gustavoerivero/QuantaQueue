@@ -17,9 +17,9 @@ Entre estas fórmulas se encuentran:
 |---------------|---------------------------------------------------------------------------|
 | _[Inverso](#inverso)_     | Calcula el inverso de un número dado.                                     |
 | _[Porcentaje](#porcentaje)_  | Calcula el porcentaje de un número.                                       |
-| _Convertidor_ | Transforma una unidad de tiempo dada en otra.                             |
-| _Sumatoria_   | Calcula la sumatoria de una expresión.                                    |
-| _Rho_         | Calcula el factor de utilización del sistema o la intensidad del tráfico. |
+| _[Convertidor](#convertidor)_ | Transforma una unidad de tiempo dada en otra.                             |
+| _[Sumatoria](#sumatoria)_   | Calcula la sumatoria de una expresión.                                    |
+| _[Rho](#rho)_         | Calcula el factor de utilización del sistema o la intensidad del tráfico. |
 
 ## Inverso
 
@@ -116,13 +116,83 @@ const result = Percent(value, total, false); // "25%"
 La función ```Percent``` convierte un número a un porcentaje formateándolo como:
 
 ```matlab
-num * total * 100%
+Percent(num, total, true) = num * total%
 ```
 
 o
 
 ```matlab
-num / total * 100%
+Percent(num, total, false) = num / total * 100%
 ```
 
 Dependiendo del valor del parámetro ```type```.
+
+## Convertidor
+
+La función ```Convert``` convierte un valor de tiempo de una unidad a otra. Se recomienda usar la variable ```time``` que proporciona la librería.
+
+### Parámetros
+
+La función ```Convert``` tiene cuatro parámetros:
+
+- ```sourceValue```: El valor del tiempo a convertir.
+- ```sourceUnit```: La unidad de tiempo de origen.
+- ```targetUnit```: La unidad de tiempo destino.
+- ```decimals```: El número de decimales a los que se va a redondear el resultado. El valor predeterminado es 4.
+
+### Retorno
+
+La función ```Convert``` devuelve el valor convertido a la unidad de tiempo especificada como un número.
+
+### Errores
+
+La función ```Convert``` puede arrojar los siguientes errores:
+
+- ```Error```: Si la variable ```sourceUnit``` no tiene un valor numérico.
+- ```Error```: Si la variable ```sourceValue``` no tiene un valor numérico.
+- ```Error```: Si la variable ```targetUnit``` no tiene un valor numérico.
+- ```Error```: Si la variable ```sourceValue``` es igual a cero.
+- ```Error```: Si la variable ```sourceUnit``` es igual a cero.
+
+### Ejemplo de uso
+
+El siguiente código convierte 30 minutos a horas:
+
+```typescript
+import { time, Convert } from "quantaqueue"
+
+const minutes = 30;
+const sourceUnit = time.find(unit => unit.text === 'Minute')!.value; // 60 (segundos)
+const targetUnit = time.find(unit => unit.text === 'Hour')!.value; // 3600 (segundos)
+const convertedValue = Convert(minutes, sourceUnit, targetUnit); // 0.5
+```
+
+### Explicación matemática
+
+La función ```Convert``` convierte un valor de tiempo de una unidad a otra utilizando la siguiente fórmula:
+
+```matlab
+convertedValue = (1 / (sourceValue * sourceUnit)) * targetUnit
+```
+
+donde:
+
+- ```sourceValue```: El valor del tiempo a convertir.
+- ```sourceUnit```: La unidad de tiempo de origen.
+- ```targetValue```: La unidad de tiempo destino.
+
+Por ejemplo, para convertir 30 minutos a horas, se utilizaría la siguiente fórmula:
+
+```matlab
+convertedValue = (1 / (30 * 60)) * 3600
+```
+
+Esto daría como resultado un valor convertido de ```0,5```, que es equivalente a 30 minutos en horas.
+
+Ahora bien, la primera parte de la fórmula, ```1 / (sourceValue * sourceUnit)```, representa el número de veces que la unidad de tiempo de origen está contenida en la unidad de tiempo de destino. Por ejemplo, 60 minutos están contenidos en 1 hora un total de 60 veces.
+
+La segunda parte de la fórmula, ```* targetUnit```, representa el valor de la unidad de tiempo de destino. Por ejemplo, el valor de 1 hora es 3600 segundos.
+
+El producto de etas dos partes de la fórmula es el valor convertido, que es el número de unidades de tiempo de destino que equivalen al valor de tiempo de origen.
+
+## Sumatoria

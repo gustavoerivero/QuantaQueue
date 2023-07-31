@@ -40,5 +40,4 @@ const time: TimeUnit[] = [
   { id: 16, text: 'Millennium', value: 72576000000 }
 ]
 
-
 export default time

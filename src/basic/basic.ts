@@ -19,6 +19,14 @@ import { evaluate, parse, round } from 'mathjs'
  */
 export const Inverse = (val: number = 1, decimals: number = 4): number => {
 
+  if (typeof val !== "number") {
+    throw Error(`The "val" variable must have a numeric value.`)
+  }
+
+  if (typeof decimals !== "number") {
+    throw Error(`The "decimals" variable must have a numeric value.`)
+  }
+
   if (val === 0) {
     throw Error(`The parameter 'val'cannot be equal to zero (0).`)
   }
@@ -58,6 +66,18 @@ export const Inverse = (val: number = 1, decimals: number = 4): number => {
  */
 export const Percent = (value: number = 0, total: number = 100, type: boolean | "MULTIPLY" | "DIVISION" = true, decimals: number = 4): string => {
   try {
+
+    if (typeof value !== "number") {
+      throw Error(`The "value" variable must have a numeric value.`)
+    }
+
+    if (typeof total !== "number") {
+      throw Error(`The "total" variable must have a numeric value.`)
+    }
+
+    if (typeof decimals !== "number") {
+      throw Error(`The "decimals" variable must have a numeric value.`)
+    }
 
     if (total === 0) {
       throw Error(`The parameter 'total' cannot be equal to zero (0).`)
@@ -101,9 +121,34 @@ export const Percent = (value: number = 0, total: number = 100, type: boolean | 
  * const convertedValue = Convert(minutes, sourceUnit, targetUnit); // 0.5
  * ```
  */
-export const Convert = (timeUnit: number, variableTime: number, timeUnitVariable: number, decimals: number = 4): number => {
+export const Convert = (sourceValue: number, sourceUnit: number, targetUnit: number, decimals: number = 4): number => {
   try {
-    const exp = `(1/(${variableTime}*${timeUnitVariable}))*${timeUnit}`
+
+    if (!sourceValue || typeof sourceValue !== "number") {
+      throw Error(`The "timeUnit" variable must have a numeric value.`)
+    }
+
+    if (!sourceUnit || typeof sourceUnit !== "number") {
+      throw Error(`The "variableTime" variable must have a numeric value.`)
+    }
+
+    if (!targetUnit || typeof targetUnit !== "number") {
+      throw Error(`The "timeUnitVariable" variable must have a numeric value.`)
+    }
+
+    if (typeof decimals !== "number") {
+      throw Error(`The "decimals" variable must have a numeric value.`)
+    }
+
+    if (targetUnit === 0) {
+      throw Error(`The variable "variableTime" cannot be equal to zero (0).`)
+    }
+
+    if (sourceValue === 0) {
+      throw Error(`The variable "timeUnitVariable" cannot be equal to zero (0).`)
+    }
+
+    const exp = `(1/(${sourceValue}*${sourceUnit}))*${targetUnit}`
     const res = evaluate(exp)
     return Number(round(res, decimals))
   } catch (error) {
@@ -134,20 +179,43 @@ export const Convert = (timeUnit: number, variableTime: number, timeUnitVariable
  */
 export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expression: string = 'n', decimals: number = 4): number => {
 
-  upperLimit = upperLimit ?? 0
-  expression = expression ?? 'n'
-
   try {
+
+    if (typeof lowerLimit !== "number") {
+      throw Error(`The "lowerLimit" variable must have a numeric value.`)
+    }
+
+    if (typeof upperLimit !== "number") {
+      throw Error(`The "upperLimit" variable must have a numeric value.`)
+    }
+
+    if (typeof expression !== "string") {
+      throw Error(`The "expression" variable must have a string value.`)
+    }
+
+    if (typeof decimals !== "number") {
+      throw Error(`The "decimals" variable must have a numeric value.`)
+    }
+
+    upperLimit = upperLimit ?? 0
+    expression = expression ?? 'n'
+
     let sum: number = 0
     let n: number = lowerLimit
+
     for (let i = lowerLimit; i <= upperLimit; i++) {
+
       const node = parse(expression.replaceAll('n', String(n)))
       const code = node.compile()
       const add = code.evaluate()
+
       const exp = `${sum}+${add}`
+
       sum = evaluate(exp)
       n++
+
     }
+
     return Number(round(sum, decimals))
   } catch (error) {
     throw Error(`Summation error: ${error}`)
@@ -180,9 +248,23 @@ export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expres
  */
 export const Rho = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
 
-  serverSize = serverSize ?? 1
-
   try {
+
+    if (typeof lambda !== "number") {
+      throw Error(`The "lambda" variable must have a numeric value.`)
+    }
+
+    if (typeof mu !== "number") {
+      throw Error(`The "mu" variable must have a numeric value.`)
+    }
+
+    if (typeof serverSize !== "number") {
+      throw Error(`The "serverSize" variable must have a numeric value.`)
+    }
+
+    if (typeof decimals !== "number") {
+      throw Error(`The "decimals" variable must have a numeric value.`)
+    }
 
     if (mu === 0) {
       throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
@@ -192,11 +274,13 @@ export const Rho = (lambda: number = 0, mu: number = 1, serverSize: number = 1, 
       throw Error(`The parameter 'serverSize' cannot be equal to zero (0) or minor to one (serverSize < 1).`)
     }
 
+    serverSize = serverSize ?? 1
+
     const exp = `${lambda}/(${mu}*${serverSize})`
     const rho = evaluate(exp)
 
     if (rho < 1) {
-      console.log(`The system stabilizes, i.e., converges to a number.`)
+      console.info(`The system stabilizes, i.e., converges to a number.`)
     }
 
     return Number(round(rho, decimals))
