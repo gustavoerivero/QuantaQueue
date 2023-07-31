@@ -129,7 +129,9 @@ Depending on the value of the ```type``` parameter.
 
 ## Convert
 
-The ```Convert``` function converts a time value from one unit to another. It is recommended to use the ```time``` variable provided by the library.
+The ```Convert``` function converts a time value from one unit to another. 
+
+*Note*: It is recommended to use the [```time```](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/time/README.md) variable provided by the library.
 
 The ```Convert``` function has four parameters:
 

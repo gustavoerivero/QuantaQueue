@@ -69,7 +69,7 @@ La función ```Percent``` convierte un número a un formato de porcentaje. El po
 
 Se recomienda que, cuando el 100% sea igual a 1 y el valor que se desea calcular el porcentaje sea menor a este 1, utilizar la forma estándar del método (Solo pasando el parámetro ```value```).
 
-El método en su forma estándar representa una multiplicación del parámetro ```value``` por 100%, mientras que el método en su variante divisoria, tiene la forma de la división entre el parámetro ```value``` con el parámetro ````total``` y luego multiplicado por 100%.
+El método en su forma estándar representa una multiplicación del parámetro ```value``` por 100%, mientras que el método en su variante divisoria, tiene la forma de la división entre el parámetro ```value``` con el parámetro ```total``` y luego multiplicado por 100%.
 
 ### Parámetros
 
@@ -129,7 +129,9 @@ Dependiendo del valor del parámetro ```type```.
 
 ## Convertidor
 
-La función ```Convert``` convierte un valor de tiempo de una unidad a otra. Se recomienda usar la variable ```time``` que proporciona la librería.
+La función ```Convert``` convierte un valor de tiempo de una unidad a otra.
+
+*Nota:* Se recomienda usar la variable [```time```](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/time/README-ES.md) que proporciona la librería.
 
 ### Parámetros
 
