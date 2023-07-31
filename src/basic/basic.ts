@@ -173,8 +173,8 @@ export const Convert = (sourceValue: number, sourceUnit: number, targetUnit: num
  * // Calculate the summation of n^2 from 1 to 5:
  * const lowerLimit = 1;
  * const upperLimit = 5;
- * const expression = 'n^2';
- * const result = Summation(lowerLimit, upperLimit, expression); // 55
+ * const expression = '(n+1)/2';
+ * const result = Summation(lowerLimit, upperLimit, expression); // 10
  * ```
  */
 export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expression: string = 'n', decimals: number = 4): number => {
@@ -197,6 +197,7 @@ export const Summation = (lowerLimit: number = 0, upperLimit: number = 0, expres
       throw Error(`The "decimals" variable must have a numeric value.`)
     }
 
+    lowerLimit = lowerLimit ?? 0
     upperLimit = upperLimit ?? 0
     expression = expression ?? 'n'
 

@@ -193,6 +193,72 @@ Ahora bien, la primera parte de la fórmula, ```1 / (sourceValue * sourceUnit)``
 
 La segunda parte de la fórmula, ```* targetUnit```, representa el valor de la unidad de tiempo de destino. Por ejemplo, el valor de 1 hora es 3600 segundos.
 
-El producto de etas dos partes de la fórmula es el valor convertido, que es el número de unidades de tiempo de destino que equivalen al valor de tiempo de origen.
+El producto de estas dos partes de la fórmula es el valor convertido, que es el número de unidades de tiempo de destino que equivalen al valor de tiempo de origen.
 
 ## Sumatoria
+
+La función ```Summation``` calcula la suma de una expresión sobre un rango de valores.
+
+### Parámetros
+
+La función ```Summation``` tiene cuatro parámetros:
+
+- ```lowerLimit```: El límite inferior del rango de suma. El valor predeterminado es 0.
+- ```upperLimit```: El límite superior del rango de suma. El valor predeterminado es 0.
+- ```expression```: La expresión a evaluar en cada iteración de la suma. El valor predeterminado es ```"n"```.
+- ```decimals```: El número de decimales a los que se va a redondear el resultado. El valor predeterminado es 4.
+
+### Retorno
+
+La función ```Summation``` devuelve la suma de la expresión sobre el rango de valores como un número.
+
+### Errores
+
+La función ```Summation``` puede arrojar los siguientes errores:
+
+- ```Error```: Si la variable ```lowerLimit``` no tiene un valor numérico.
+- ```Error```: Si la variable ```upperLimit``` no tiene un valor numérico.
+- ```Error```: Si la variable ```expression``` no tiene un valor de cadena.
+- ```Error```: Si la variable ```decimals``` no tiene un valor numérico.
+
+La función ```Summation``` puede ser lenta para grandes rangos de valores.
+
+### Ejemplo de uso
+
+El siguiente código calcula la suma de ```(n+1)/2``` desde 1 hasta 5:
+
+```typescript
+// Calcula la suma de (n+1)/2 desde 1 hasta 5:
+const lowerLimit = 1;
+const upperLimit = 5;
+const expression: "(n+1)/2"
+
+const result = Summation(lowerLimit, upperLimit, expression); // 10
+```
+
+### Explicación matemática 
+
+La función ```Summation``` calcula la suma de una expresión sobre un rango de valores, utilizando el límite inferior especificado, el límite superior y la expresión. La expresión puede contener la variable ```n``` que representa el valor actual en cada iteración. El resultado se redondea al número especificado de decimales.
+
+La función ```Summation``` funciona de la siguiente manera:
+
+1. Inicializa la variable ```sum``` a 0.
+2. Inicializa la variable ```n``` al límite inferior.
+3. Itera sobre el rango de valores, desde el límite inferior hasta el límite superior.
+4. En cada iteración, evalúa la expresión y agrega el resultado a la variable ```sum```.
+5. Al final de la iteración, la variable ```sum``` contiene la suma de la expresión sobre el rango de valores.
+6. La función ```Summation``` devuelve la variable ```sum```.
+
+En otras palabras, la función ```Summation``` utiliza la siguiente fórmula para calcular la suma de una expresión sobre un rango de valores:
+
+```typescript
+sum = (n_1 + n_2 + ... + n_k)
+```
+
+donde:
+
+- ```n_1, n_2, ..., n_k``` son los valores en el rango.
+
+La función ```Summation``` calcula la suma de los valores en el rango sumando los valores uno por uno.
+
+## Rho
