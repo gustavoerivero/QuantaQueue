@@ -322,7 +322,7 @@ Where:
 Therefore:
 
 - If ```Rho > 1```: The system is overcrowded most of the time, i.e., the queue is permanently growing.
-- Yes ```Rho < 1```: The system is stable.
+- If ```Rho < 1```: The system is stable.
 - If ```Rho = 1```: The system is relentlessly serving but not letting the queue grow.
 
 For example, if ```Rho = 0.9```, it indicates that 90% of the time the queuing system is busy and 10% of the time it is not.
