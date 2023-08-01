@@ -163,8 +163,8 @@ export const QtyServerBusy = (model: number = 1, lambda: number = 0, mu: number 
  * ```
  */
 export const InitialProbability = (model: number = 1, lambda: number = 0, mu: number = 1, serverSize: number = 1, limit: number = 1, decimals: number = 4): ModelResult => {
-  const s = serverSize
-  const k = limit
+  const s = serverSize ?? 1
+  const k = limit ?? 1
   try {
 
     if (model <= 0 || model > 5) {
