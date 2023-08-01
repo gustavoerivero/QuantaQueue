@@ -12,6 +12,11 @@
 
 A continuación, se definen los tipos de datos que contiene la librería:
 
+| **_Índice_**  | **Definición**                                                        |
+|---------------|-----------------------------------------------------------------------|
+| _[TimeUnit](#timeunit)_    | Tipo de dato que representa una unidad de tiempo.                     |
+| _[ModelResult](#modelresult)_ | Tipo de datos que representa la respuesta de las funciones generales. |
+
 ## TimeUnit
 
 El tipo ```TimeUnit``` es un tipo que representa una unidad de tiempo. Tiene las siguientes propiedades:

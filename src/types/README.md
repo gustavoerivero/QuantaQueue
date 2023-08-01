@@ -12,6 +12,11 @@
 
 In the next section, the data types contained in the library are defined:
 
+| **_Index_**   | **Definition**                                               |
+|---------------|--------------------------------------------------------------|
+| _[TimeUnit](#timeunit)_    | Data type representing a unit of time.                       |
+| _[ModelResult](#modelresult)_ | Data type representing the response of the general functions. |
+
 ## TimeUnit
 
 The ```TimeUnit``` type is a type that represents a unit of time. It has the following properties:
@@ -37,7 +42,7 @@ The ```ModelResult``` type is a data type that represents the response generated
 - ```result```: The value obtained by the model. In case the model cannot return a value, it returns ```null```.
 - ```message```: Text indicating the result of the operation.
 
-This type ````ModelResult``` is used to handle more precisely the results obtained from the [general functions](https://github.com/gustavoerivero/formulae/blob/main/src/research/General/README.md). For example, the following code handles this data type:
+This type ```ModelResult``` is used to handle more precisely the results obtained from the [general functions](https://github.com/gustavoerivero/formulae/blob/main/src/research/General/README.md). For example, the following code handles this data type:
 
 ```typescript
 let result: ModelResult;
