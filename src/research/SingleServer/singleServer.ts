@@ -36,7 +36,6 @@ export const SSInitialProbability = (lambda: number = 0, mu: number = 1, decimal
 
   } catch (error) {
     throw Error(`Single Server Initial Probability error: ${error}`)
-    
   }
 }
 
@@ -47,7 +46,7 @@ export const SSInitialProbability = (lambda: number = 0, mu: number = 1, decimal
  * @param mu - The rate of clients served in the system (default: 1).
  * @param iteration - The number of customers 'n' for which the probability is calculated (default: 1).
  * @param decimals - The number of decimal places to round the result (default: 4).
- * @returns The probability of having 'n' customers in the single server model as a number, or `null` if an error occurs during the calculation.
+ * @returns The probability of having 'n' customers in the single server model as a number.
  * 
  * @remarks
  * The probability 'P(n)' represents the probability of having 'n' customers in the system in a single server model. It is calculated using the system utilization factor 'rho' and the initial probability 'P(0)'.
@@ -71,7 +70,7 @@ export const SSNProbability = (lambda: number = 0, mu: number = 1, iteration: nu
     }
 
     if (n < 1) {
-      throw Error(`The parameter 'n' cannot be lower than 1.`)
+      throw Error(`The parameter 'iteration' cannot be lower than 1.`)
     }
 
     const rho = Rho(lambda, mu, 1, 15)
