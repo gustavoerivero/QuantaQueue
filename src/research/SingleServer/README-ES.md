@@ -132,39 +132,216 @@ La función ```SSNProbability``` utiliza esta fórmula para calcular la probabil
 
 ### SSSClientEx
 
+La función ```SSSClientEx``` calcula el valor esperado del número de clientes en el sistema.
+
 #### Parámetros
+
+La función ```SSSClientEx``` tiene los siguientes parámetros:
+
+- ```lambda```: La tasa de llegada de clientes al sistema. El valor predeterminado es 0.
+- ```mu```: La tasa de clientes servidos en el sistema. El valor predeterminado es 1.
+- ```decimals```: El número de decimales a los que se va a redondear el resultado. El valor predeterminado es 4.
 
 #### Retorno
 
+La función ```SSSClientEx``` devuelve el valor esperado del número de clientes en el sistema como un número.
+
 #### Errores
+
+La función ```SSSClientEx``` puede arrojar los siguientes errores:
+
+- ```Error```: Si el parámetro ```mu``` es igual a 0.
 
 #### Ejemplo de uso
 
+El siguiente código calcula el valor esperado del número de clientes en un sistema de un solo servidor con los siguientes parámetros:
+
+```typescript
+// Calculate the expected value of the number of customers in a single server system with the following parameters:
+const lambda = 0.5; // customer arrival rate per unit time
+const mu = 2; // service rate per unit time
+const result = SSSClientEx(lambda, mu); // 0.333
+
+```
+
 #### Explicación matemática
+
+El valor esperado del número de clientes en el sistema, denotado como ```Ls```, representa el número promedio de clientes presentes en el sistema. Se calcula en base al factor de utilización del sistema ```rho```.
+
+Si el número de servidores ```serverSize``` es 1, ```Ls``` se calcula utilizando la fórmula ```rho / (1 - rho)```. ```rho``` es el factor de utilización del sistema, que se calcula como la relación de la tasa de llegada de clientes ```lambda``` con el producto de la tasa de servicio ```mu``` y el número de servidores ```serverSize``` que, para esta función, siempre será igual a 1.
+
+La siguiente es la fórmula matemática para calcular el valor esperado del número de clientes en el sistema:
+
+```matlab
+Ls = rho / (1 - rho)
+```
+
+donde:
+
+- ```Ls```: El valor esperado del número de clientes.
+- ```rho```: El factor de utilización del sistema.
+
+La función ```SSSClientEx``` utiliza esta fórmula para calcular el valor esperado del número de clientes en el sistema. El resultado se redondea al número especificado de decimales.
 
 ### SSQClientEx
 
+La función ```SSQClientEx``` calcula el valor esperado del número de clientes en la cola.
+
 #### Parámetros
+
+La función ```SSQClientEx``` tiene los siguientes parámetros:
+
+- ```lambda```: La tasa de llegada de clientes al sistema. El valor predeterminado es 0.
+- ```mu```: La tasa de clientes servidos en el sistema. El valor predeterminado es 1.
+- ```decimals```: El número de decimales a los que se va a redondear el resultado. El valor predeterminado es 4.
 
 #### Retorno
 
+La función ```SSQClientEx``` devuelve el valor esperado del número de clientes en la cola como un número.
+
 #### Errores
+
+La función ```SSQClientEx``` puede arrojar los siguientes errores:
+
+- ```Error```: Si el parámetro ```mu``` es igual a 0.
 
 #### Ejemplo de uso
 
+El siguiente código calcula el valor esperado del número de clientes en la cola en un sistema de un solo servidor con los siguientes parámetros:
+
+```typescript
+// Calculate the expected value of the number of customers in the queue in a single server system with the following parameters:
+const lambda = 0.5; // customer arrival rate per unit time
+const mu = 2; // service rate per unit time
+const result = SSQClientEx(lambda, mu); // 0.083
+
+```
+
 #### Explicación matemática
+
+El valor esperado del número de clientes en la cola, denotado como ```Lq```, representa el número promedio de clientes esperando en la cola.
+
+Lq se calcula utilizando la fórmula ```(rho^2) / (1 - rho)```. ```rho``` es el factor de utilización del sistema, que se calcula como la relación de la tasa de llegada de clientes ```lambda``` con el producto de la tasa de servicio ```mu``` y el número de servidores ```serverSize``` que, para esta función, siempre será 1.
+
+La siguiente es la fórmula matemática para calcular el valor esperado del número de clientes en la cola:
+
+```matlab
+Lq = (rho^2) / (1 - rho)
+```
+
+donde:
+
+- ```Lq```: El valor esperado del número de clientes en la cola.
+- ```rho```: El factor de utilización del sistema.
+
+La función ```SSQClientEx``` utiliza esta fórmula para calcular el valor esperado del número de clientes en la cola. El resultado se redondea al número especificado de decimales.
 
 ### SSSTimeEx
 
+La función ```SSSTimeEx``` calcula el tiempo medio de espera en el sistema.
+
 #### Parámetros
+
+La función ```SSSTimeEx``` tiene los siguientes parámetros:
+
+- ```lambda```: La tasa de llegada de clientes al sistema. El valor predeterminado es 0.
+- ```mu```: La tasa de clientes servidos en el sistema. El valor predeterminado es 1.
+- ```decimals```: El número de decimales a los que se va a redondear el resultado. El valor predeterminado es 4.
 
 #### Retorno
 
+La función ```SSSTimeEx``` devuelve el tiempo medio de espera en el sistema como un número.
+
 #### Errores
+
+La función ```SSSTimeEx``` puede arrojar los siguientes errores:
+
+- ```Error```: Si el parámetro ```mu``` es igual a 0.
 
 #### Ejemplo de uso
 
+El siguiente código calcula el tiempo medio de espera en el sistema en un sistema de un solo servidor con los siguientes parámetros:
+
+```typescript
+// Calculate the average waiting time in the system in a single server system with the following parameters:
+const lambda = 0.5; // customer arrival rate per unit time
+const mu = 2; // service rate per unit time
+const result = SSSTimeEx(lambda, mu); // 0.666
+```
+
 #### Explicación matemática
+
+El tiempo medio de espera en el sistema, denotado como ```Ws```, representa el tiempo promedio que un cliente pasa en el sistema, incluyendo tanto el tiempo de espera en la cola como el tiempo de servicio.
+
+```Ws``` se calcula utilizando la fórmula ```1 / (mu - lambda)```. ```lambda``` es la tasa de llegada de clientes, y ```mu``` es la tasa de servicio. Ambas tasas se expresan en unidades de clientes por unidad de tiempo.
+
+La siguiente es la fórmula matemática para calcular el tiempo medio de espera en el sistema:
+
+```matlab
+Ws = 1 / (mu - lambda)
+```
+
+donde:
+
+- ```Ws```: El tiempo medio de espera en el sistema.
+- ```lambda```: La tasa de llegada de clientes.
+- ```mu```: La tasa de servicio.
+
+La función ```SSSTimeEx``` utiliza esta fórmula para calcular el tiempo medio de espera en el sistema. El resultado se redondea al número especificado de decimales.
+
+### SSQTimeEx
+
+La función ```SSQTimeEx``` calcula el tiempo medio de espera en la cola.
+
+#### Parámetros
+
+La función ```SSQTimeEx``` tiene los siguientes parámetros:
+
+- ```lambda```: La tasa de llegada de clientes al sistema. El valor predeterminado es 0.
+- ```mu```: La tasa de clientes servidos en el sistema. El valor predeterminado es 1.
+- ```decimals```: El número de decimales a los que se va a redondear el resultado. El valor predeterminado es 4.
+
+#### Retorno
+
+La función ```SSQTimeEx``` devuelve el tiempo medio de espera en la cola como un número.
+
+#### Errores
+
+La función ```SSQTimeEx``` puede arrojar los siguientes errores:
+
+- ```Error```: Si el parámetro ```mu``` es igual a 0.
+
+#### Ejemplo de uso
+
+El siguiente código calcula el tiempo medio de espera en la cola en un sistema de un solo servidor con los siguientes parámetros:
+
+```typescript
+// Calculate the average waiting time in the queue in a single server system with the following parameters:
+const lambda = 0.5; // customer arrival rate per unit time
+const mu = 2; // service rate per unit time
+const result = SSQTimeEx(lambda, mu); // 0.166
+```
+
+#### Explicación matemática
+
+El tiempo medio de espera en la cola, denotado como ```Wq```, representa el tiempo promedio que un cliente pasa esperando en la cola antes de ser atendido.
+
+```Wq``` se calcula utilizando la fórmula ```rho / (mu * (1 - rho))```, donde ```rho``` es el factor de utilización del sistema o intensidad de tráfico. ```lambda``` es la tasa de llegada de clientes, y ```mu``` es la tasa de servicio. Ambas tasas se expresan en unidades de clientes por unidad de tiempo.
+
+La siguiente es la fórmula matemática para calcular el tiempo medio de espera en la cola:
+
+```matlab
+Wq = rho / (mu * (1 - rho))
+```
+
+donde:
+
+- ```Wq```: El tiempo medio de espera en la cola.
+- ```lambda```: La tasa de llegada de clientes.
+- ```mu```: La tasa de servicio.
+- ```rho```: El factor de utilización del sistema.
+
+La función ```SSQTimeEx``` utiliza esta fórmula para calcular el tiempo medio de espera en la cola. El resultado se redondea al número especificado de decimales.
 
 ## M/M/1/k
 
