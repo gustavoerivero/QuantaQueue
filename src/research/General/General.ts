@@ -1,4 +1,4 @@
-import { ModelResult } from '../../types'
+import { ModelResult } from '../../types';
 
 import {
   MGInitialProbability,
@@ -19,8 +19,8 @@ import {
   SSQClientEx,
   SSQTimeEx,
   SSSClientEx,
-  SSSTimeEx
-} from '../SingleServer'
+  SSSTimeEx,
+} from '../SingleServer';
 
 import {
   MMSInitialProbability,
@@ -36,8 +36,8 @@ import {
   MMSQTimeEx,
   MMSQtyServerBusy,
   MMSSClientEx,
-  MMSSTimeEx
-} from '../MultiServer'
+  MMSSTimeEx,
+} from '../MultiServer';
 
 /**
  * Method picker to calculate the quantity of servers busy for various queuing models.
@@ -75,59 +75,64 @@ import {
  * const result = QtyServerBusy(model, lambda, mu, serverSize, iteration, limit, decimals); // 0.0012
  * ```
  */
-export const QtyServerBusy = (model: number = 1, lambda: number = 0, mu: number = 1, serverSize: number = 1, iteration: number = 1, limit: number = 1, decimals: number = 4): ModelResult => {
-  const n = iteration
-  const s = serverSize
-  const k = limit
+export const QtyServerBusy = (
+  model: number = 1,
+  lambda: number = 0,
+  mu: number = 1,
+  serverSize: number = 1,
+  iteration: number = 1,
+  limit: number = 1,
+  decimals: number = 4,
+): ModelResult => {
+  const n = iteration;
+  const s = serverSize;
+  const k = limit;
   try {
-
     if (model <= 0 || model > 5) {
-      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`)
+      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`);
     }
 
     switch (model) {
-
       case 1:
         return {
           result: null,
-          message: 'The M/M/1 model does not quantify the occupied servers.'
-        }
+          message: 'The M/M/1 model does not quantify the occupied servers.',
+        };
 
       case 2:
         return {
           result: MMSQtyServerBusy(lambda, mu, s, n, decimals),
-          message: 'Successful calculation for the M/M/s model.'
-        }
+          message: 'Successful calculation for the M/M/s model.',
+        };
 
       case 3:
         return {
           result: MMKQtyServerBusy(lambda, mu, n, k, decimals),
-          message: 'Successful calculation for the M/M/1/k model.'
-        }
+          message: 'Successful calculation for the M/M/1/k model.',
+        };
 
       case 4:
         return {
           result: MMSKQtyServerBusy(mu, s, n, k, decimals),
-          message: 'Successful calculation for the M/M/s/k model.'
-        }
+          message: 'Successful calculation for the M/M/s/k model.',
+        };
 
       case 5:
         return {
           result: null,
-          message: 'The M/G/1 model does not quantify the occupied servers.'
-        }
+          message: 'The M/G/1 model does not quantify the occupied servers.',
+        };
 
       default:
         return {
           result: null,
-          message: 'Invalid queuing model selected.'
-        }
-
+          message: 'Invalid queuing model selected.',
+        };
     }
   } catch (error) {
-    throw Error(`Quantity of Server Busy function picker error: ${error}`)
+    throw Error(`Quantity of Server Busy function picker error: ${error}`);
   }
-}
+};
 
 /**
  * Method picker to calculate the initial probability for various queuing models.
@@ -162,59 +167,62 @@ export const QtyServerBusy = (model: number = 1, lambda: number = 0, mu: number 
  * const result = InitialProbability(model, lambda, mu, serverSize, decimals); // { result: 0.303, message: 'Successful calculation for the M/M/s model.' }
  * ```
  */
-export const InitialProbability = (model: number = 1, lambda: number = 0, mu: number = 1, serverSize: number = 1, limit: number = 1, decimals: number = 4): ModelResult => {
-  const s = serverSize ?? 1
-  const k = limit ?? 1
+export const InitialProbability = (
+  model: number = 1,
+  lambda: number = 0,
+  mu: number = 1,
+  serverSize: number = 1,
+  limit: number = 1,
+  decimals: number = 4,
+): ModelResult => {
+  const s = serverSize ?? 1;
+  const k = limit ?? 1;
   try {
-
     if (model <= 0 || model > 5) {
-      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`)
+      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`);
     }
 
     switch (model) {
-
       case 1:
         return {
           result: SSInitialProbability(lambda, mu, decimals),
-          message: 'Successful calculation for the M/M/1 model.'
-        }
+          message: 'Successful calculation for the M/M/1 model.',
+        };
 
       case 2:
         return {
           result: MMSInitialProbability(lambda, mu, s, decimals),
-          message: 'Successful calculation for the M/M/s model.'
-        }
+          message: 'Successful calculation for the M/M/s model.',
+        };
 
       case 3:
         return {
           result: MMKInitialProbability(lambda, mu, k, decimals),
-          message: 'Successful calculation for the M/M/1/k model.'
-        }
+          message: 'Successful calculation for the M/M/1/k model.',
+        };
 
       case 4:
         return {
           result: MMSKInitialProbability(lambda, mu, s, k, decimals),
-          message: 'Successful calculation for the M/M/s/k model.'
-        }
+          message: 'Successful calculation for the M/M/s/k model.',
+        };
 
       case 5:
         return {
           result: MGInitialProbability(lambda, mu, decimals),
-          message: 'Successful calculation for the M/G/1 model.'
-        }
+          message: 'Successful calculation for the M/G/1 model.',
+        };
 
       default:
         return {
           result: null,
-          message: 'Invalid queuing model selected.'
-        }
-
+          message: 'Invalid queuing model selected.',
+        };
     }
-
   } catch (error) {
-    throw Error(`Initial Probability function picker error: ${error}`)
+    throw Error(`Initial Probability function picker error: ${error}`);
   }
-}
+};
 
 /**
  * Method for calculating the probability of having a specific number of customers (n) in the queuing system for different queuing models.
@@ -251,58 +259,64 @@ export const InitialProbability = (model: number = 1, lambda: number = 0, mu: nu
  * const result = NProbability(model, lambda, mu, serverSize, iteration); // { result: 0.0222, message: 'Successful calculation for the M/M/s model.' }
  * ```
  */
-export const NProbability = (model: number = 1, lambda: number = 0, mu: number = 1, serverSize: number = 1, iteration: number = 1, limit: number = 1, decimals: number = 4): ModelResult => {
-  const n = iteration
-  const s = serverSize
-  const k = limit
+export const NProbability = (
+  model: number = 1,
+  lambda: number = 0,
+  mu: number = 1,
+  serverSize: number = 1,
+  iteration: number = 1,
+  limit: number = 1,
+  decimals: number = 4,
+): ModelResult => {
+  const n = iteration;
+  const s = serverSize;
+  const k = limit;
   try {
-
     if (model <= 0 || model > 5) {
-      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`)
+      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`);
     }
 
     switch (model) {
-
       case 1:
         return {
           result: SSNProbability(lambda, mu, n, decimals),
-          message: 'Successful calculation for the M/M/1 model.'
-        }
+          message: 'Successful calculation for the M/M/1 model.',
+        };
 
       case 2:
         return {
           result: MMSNProbability(lambda, mu, s, n, decimals),
-          message: 'Successful calculation for the M/M/s model.'
-        }
+          message: 'Successful calculation for the M/M/s model.',
+        };
 
       case 3:
         return {
           result: MMKNProbability(lambda, mu, n, k, decimals),
-          message: 'Successful calculation for the M/M/1/k model.'
-        }
+          message: 'Successful calculation for the M/M/1/k model.',
+        };
 
       case 4:
         return {
           result: MMSKNProbability(lambda, mu, s, n, k, decimals),
-          message: 'Successful calculation for the M/M/s/k model.'
-        }
+          message: 'Successful calculation for the M/M/s/k model.',
+        };
 
       case 5:
         return {
           result: MGNProbability(lambda, mu, n, decimals),
-          message: 'Successful calculation for the M/G/1 model.'
-        }
+          message: 'Successful calculation for the M/G/1 model.',
+        };
 
       default:
         return {
           result: null,
-          message: 'Invalid queuing model selected.'
-        }
+          message: 'Invalid queuing model selected.',
+        };
     }
   } catch (error) {
-    throw Error(`N Probability Method Picker error: ${error}`)
+    throw Error(`N Probability Method Picker error: ${error}`);
   }
-}
+};
 
 /**
  * Method for calculating the expected number of clients in the queue for different queuing models.
@@ -338,60 +352,64 @@ export const NProbability = (model: number = 1, lambda: number = 0, mu: number =
  * const result = QClientEx(model, lambda, mu, serverSize); // { result: 0.75, message: 'Successful calculation for the M/M/s model.' }
  * ```
  */
-export const QClientEx = (model: number = 1, lambda: number = 0, mu: number = 1, serverSize: number = 1, variation: number = 0, limit: number = 1, decimals: number = 4): ModelResult => {
-  const v = variation
-  const s = serverSize
-  const k = limit
+export const QClientEx = (
+  model: number = 1,
+  lambda: number = 0,
+  mu: number = 1,
+  serverSize: number = 1,
+  variation: number = 0,
+  limit: number = 1,
+  decimals: number = 4,
+): ModelResult => {
+  const v = variation;
+  const s = serverSize;
+  const k = limit;
   try {
-
     if (model <= 0 || model > 5) {
-      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`)
+      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`);
     }
 
     switch (model) {
-
       case 1:
         return {
           result: SSQClientEx(lambda, mu, 1, decimals),
-          message: 'Successful calculation for the M/M/1 model.'
-        }
+          message: 'Successful calculation for the M/M/1 model.',
+        };
 
       case 2:
         return {
           result: MMSQClientEx(lambda, mu, s, decimals),
-          message: 'Successful calculation for the M/M/s model.'
-        }
+          message: 'Successful calculation for the M/M/s model.',
+        };
 
       case 3:
         return {
           result: MMKQClientEx(lambda, mu, k, decimals),
-          message: 'Successful calculation for the M/M/1/k model.'
-        }
+          message: 'Successful calculation for the M/M/1/k model.',
+        };
 
       case 4:
         return {
           result: MMSKQClientEx(lambda, mu, s, k, decimals),
-          message: 'Successful calculation for the M/M/s/k model.'
-        }
+          message: 'Successful calculation for the M/M/s/k model.',
+        };
 
       case 5:
         return {
           result: MGQClientEx(lambda, mu, v, decimals),
-          message: 'Successful calculation for the M/G/1 model.'
-        }
+          message: 'Successful calculation for the M/G/1 model.',
+        };
 
       default:
         return {
           result: null,
-          message: 'Invalid queuing model selected.'
-        }
-
+          message: 'Invalid queuing model selected.',
+        };
     }
-
   } catch (error) {
-    throw Error(`Expected clients in queue Method Picker error: ${error}`)
+    throw Error(`Expected clients in queue Method Picker error: ${error}`);
   }
-}
+};
 
 /**
  * Method for calculating the expected number of clients in the system (both in the queue and being served) for different queuing models.
@@ -427,60 +445,64 @@ export const QClientEx = (model: number = 1, lambda: number = 0, mu: number = 1,
  * const result = SClientEx(model, lambda, mu, serverSize); // { result: 1.75, message: 'Successful calculation for the M/M/s model.' }
  * ```
  */
-export const SClientEx = (model: number = 1, lambda: number = 0, mu: number = 1, serverSize: number = 1, variation: number = 0, limit: number = 1, decimals: number = 4): ModelResult => {
-  const v = variation
-  const s = serverSize
-  const k = limit
+export const SClientEx = (
+  model: number = 1,
+  lambda: number = 0,
+  mu: number = 1,
+  serverSize: number = 1,
+  variation: number = 0,
+  limit: number = 1,
+  decimals: number = 4,
+): ModelResult => {
+  const v = variation;
+  const s = serverSize;
+  const k = limit;
   try {
-
     if (model <= 0 || model > 5) {
-      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`)
+      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`);
     }
 
     switch (model) {
-
       case 1:
         return {
           result: SSSClientEx(lambda, mu, 1, decimals),
-          message: 'Successful calculation for the M/M/1 model.'
-        }
+          message: 'Successful calculation for the M/M/1 model.',
+        };
 
       case 2:
         return {
           result: MMSSClientEx(lambda, mu, s, decimals),
-          message: 'Successful calculation for the M/M/s model.'
-        }
+          message: 'Successful calculation for the M/M/s model.',
+        };
 
       case 3:
         return {
           result: MMKSClientEx(lambda, mu, k, decimals),
-          message: 'Successful calculation for the M/M/1/k model.'
-        }
+          message: 'Successful calculation for the M/M/1/k model.',
+        };
 
       case 4:
         return {
           result: MMSKSClientEx(lambda, mu, s, k, decimals),
-          message: 'Successful calculation for the M/M/s/k model.'
-        }
+          message: 'Successful calculation for the M/M/s/k model.',
+        };
 
       case 5:
         return {
           result: MGSClientEx(lambda, mu, v, decimals),
-          message: 'Successful calculation for the M/G/1 model.'
-        }
+          message: 'Successful calculation for the M/G/1 model.',
+        };
 
       default:
         return {
           result: null,
-          message: 'Invalid queuing model selected.'
-        }
-
+          message: 'Invalid queuing model selected.',
+        };
     }
-
   } catch (error) {
-    throw Error(`Expected clients in system Method Picker error: ${error}`)
+    throw Error(`Expected clients in system Method Picker error: ${error}`);
   }
-}
+};
 
 /**
  * Method for calculating the expected time a client spends in the queue for different queuing models.
@@ -516,60 +538,64 @@ export const SClientEx = (model: number = 1, lambda: number = 0, mu: number = 1,
  * const result = QTimeEx(model, lambda, mu, serverSize); // { result: 0.625, message: 'Successful calculation for the M/M/s model.' }
  * ```
  */
-export const QTimeEx = (model: number = 1, lambda: number = 0, mu: number = 1, serverSize: number = 1, variation: number = 0, limit: number = 1, decimals: number = 4): ModelResult => {
-  const v = variation
-  const s = serverSize
-  const k = limit
+export const QTimeEx = (
+  model: number = 1,
+  lambda: number = 0,
+  mu: number = 1,
+  serverSize: number = 1,
+  variation: number = 0,
+  limit: number = 1,
+  decimals: number = 4,
+): ModelResult => {
+  const v = variation;
+  const s = serverSize;
+  const k = limit;
   try {
-
     if (model <= 0 || model > 5) {
-      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`)
+      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`);
     }
 
     switch (model) {
-
       case 1:
         return {
           result: SSQTimeEx(lambda, mu, 1, decimals),
-          message: 'Successful calculation for the M/M/1 model.'
-        }
+          message: 'Successful calculation for the M/M/1 model.',
+        };
 
       case 2:
         return {
           result: MMSQTimeEx(lambda, mu, s, decimals),
-          message: 'Successful calculation for the M/M/s model.'
-        }
+          message: 'Successful calculation for the M/M/s model.',
+        };
 
       case 3:
         return {
           result: MMKQTimeEx(lambda, mu, k, decimals),
-          message: 'Successful calculation for the M/M/1/k model.'
-        }
+          message: 'Successful calculation for the M/M/1/k model.',
+        };
 
       case 4:
         return {
           result: MMSKQTimeEx(lambda, mu, s, k, decimals),
-          message: 'Successful calculation for the M/M/s/k model.'
-        }
+          message: 'Successful calculation for the M/M/s/k model.',
+        };
 
       case 5:
         return {
           result: MGQTimeEx(lambda, mu, v, decimals),
-          message: 'Successful calculation for the M/G/1 model.'
-        }
+          message: 'Successful calculation for the M/G/1 model.',
+        };
 
       default:
         return {
           result: null,
-          message: 'Invalid queuing model selected.'
-        }
-
+          message: 'Invalid queuing model selected.',
+        };
     }
-
   } catch (error) {
-    throw Error(`Expected time in queue Method Picker error: ${error}`)
+    throw Error(`Expected time in queue Method Picker error: ${error}`);
   }
-}
+};
 
 /**
  * Method for calculating the expected time a client spends in the system (both in the queue and being served) for different queuing models.
@@ -605,60 +631,64 @@ export const QTimeEx = (model: number = 1, lambda: number = 0, mu: number = 1, s
  * const result = STimeEx(model, lambda, mu, serverSize); // { result: 1.125, message: 'Successful calculation for the M/M/s model.' }
  * ```
  */
-export const STimeEx = (model: number = 1, lambda: number = 0, mu: number = 1, serverSize: number = 1, variation: number = 0, limit: number = 1, decimals: number = 4): ModelResult => {
-  const v = variation
-  const s = serverSize
-  const k = limit
+export const STimeEx = (
+  model: number = 1,
+  lambda: number = 0,
+  mu: number = 1,
+  serverSize: number = 1,
+  variation: number = 0,
+  limit: number = 1,
+  decimals: number = 4,
+): ModelResult => {
+  const v = variation;
+  const s = serverSize;
+  const k = limit;
   try {
-
     if (model <= 0 || model > 5) {
-      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`)
+      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`);
     }
 
     switch (model) {
-
       case 1:
         return {
           result: SSSTimeEx(lambda, mu, 1, decimals),
-          message: 'Successful calculation for the M/M/1 model.'
-        }
+          message: 'Successful calculation for the M/M/1 model.',
+        };
 
       case 2:
         return {
           result: MMSSTimeEx(lambda, mu, s, decimals),
-          message: 'Successful calculation for the M/M/s model.'
-        }
+          message: 'Successful calculation for the M/M/s model.',
+        };
 
       case 3:
         return {
           result: MMKSTimeEx(lambda, mu, k, decimals),
-          message: 'Successful calculation for the M/M/1/k model.'
-        }
+          message: 'Successful calculation for the M/M/1/k model.',
+        };
 
       case 4:
         return {
           result: MMSKSTimeEx(lambda, mu, s, k, decimals),
-          message: 'Successful calculation for the M/M/s/k model.'
-        }
+          message: 'Successful calculation for the M/M/s/k model.',
+        };
 
       case 5:
         return {
           result: MGSTimeEx(lambda, mu, v, decimals),
-          message: 'Successful calculation for the M/G/1 model.'
-        }
+          message: 'Successful calculation for the M/G/1 model.',
+        };
 
       default:
         return {
           result: null,
-          message: 'Invalid queuing model selected.'
-        }
-
+          message: 'Invalid queuing model selected.',
+        };
     }
-
   } catch (error) {
-    throw Error(`Expected time in system Method Picker error: ${error}`)
+    throw Error(`Expected time in system Method Picker error: ${error}`);
   }
-}
+};
 
 /**
  * Method for picking models. Returns the name of the corresponding model.
@@ -686,52 +716,48 @@ export const STimeEx = (model: number = 1, lambda: number = 0, mu: number = 1, s
  */
 export const ModelName = (model: number = 1): ModelResult => {
   try {
-
     if (model <= 0 || model > 5) {
-      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`)
+      throw Error(`The parameter 'model' must be between 1 and 5 (inclusive).`);
     }
 
     switch (model) {
-
       case 1:
         return {
           result: 1,
-          message: 'M/M/1 model'
-        }
+          message: 'M/M/1 model',
+        };
 
       case 2:
         return {
           result: 2,
-          message: 'M/M/s model'
-        }
+          message: 'M/M/s model',
+        };
 
       case 3:
         return {
           result: 3,
-          message: 'M/M/1/k model'
-        }
+          message: 'M/M/1/k model',
+        };
 
       case 4:
         return {
           result: 4,
-          message: 'M/M/s/k model'
-        }
+          message: 'M/M/s/k model',
+        };
 
       case 5:
         return {
           result: 5,
-          message: 'M/G/1 model'
-        }
+          message: 'M/G/1 model',
+        };
 
       default:
         return {
           result: null,
-          message: 'Invalid queuing model selected.'
-        }
-
+          message: 'Invalid queuing model selected.',
+        };
     }
-
   } catch (error) {
-    throw Error(`Model Name Picker error: ${error}`)
+    throw Error(`Model Name Picker error: ${error}`);
   }
-}
+};
