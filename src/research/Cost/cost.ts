@@ -1,5 +1,5 @@
-import { evaluate, round } from 'mathjs'
-import { STimeEx } from '../General'
+import { evaluate, round } from 'mathjs';
+import { STimeEx } from '../General';
 
 /**
  * Method for calculating the cost of service. Returns the value according to the ECs model.
@@ -9,19 +9,17 @@ import { STimeEx } from '../General'
  * @returns {Number} The service cost.
  */
 export const ServiceCost = (serverCost: number = 0, serverSize: number = 1, decimals: number = 4): number => {
-  const Cs = serverCost ?? 0
-  const s = serverSize ?? 0
+  const Cs = serverCost ?? 0;
+  const s = serverSize ?? 0;
 
   try {
-
-    const exp = `${Cs}*${s}`
-    const ECs = evaluate(exp)
-    return round(ECs, decimals)
-
+    const exp = `${Cs}*${s}`;
+    const ECs = evaluate(exp);
+    return round(ECs, decimals);
   } catch (error) {
-    throw Error(`Service Cost error: ${error}`)
+    throw Error(`Service Cost error: ${error}`);
   }
-}
+};
 
 /**
  * Method for calculating the waiting cost. Returns the value according to the ECw model.
@@ -34,25 +32,32 @@ export const ServiceCost = (serverCost: number = 0, serverSize: number = 1, deci
  * @param {Number} decimals Decimals to which you want to shorten the number. Default is 4.
  * @returns {Number} The waiting cost.
  */
-export const WaitingCost = (waitingCost: number = 0, model: number = 1, lambda: number = 0, mu: number = 1, serverSize: number = 1, variance: number = 0, limit: number = 0, decimals: number = 4): number => {
+export const WaitingCost = (
+  waitingCost: number = 0,
+  model: number = 1,
+  lambda: number = 0,
+  mu: number = 1,
+  serverSize: number = 1,
+  variance: number = 0,
+  limit: number = 0,
+  decimals: number = 4,
+): number => {
   try {
-
-    const { result } = STimeEx(model, lambda, mu, serverSize, variance, limit, 15)
+    const { result } = STimeEx(model, lambda, mu, serverSize, variance, limit, 15);
 
     if (!result) {
-      throw Error(`System Time must be exist... STimeEx = ${result}.`)
+      throw Error(`System Time must be exist... STimeEx = ${result}.`);
     }
 
-    const L = lambda * result
+    const L = lambda * result;
 
-    const exp = `${waitingCost}*${L}`
-    const ECw = evaluate(exp)
-    return round(ECw, decimals)
-
+    const exp = `${waitingCost}*${L}`;
+    const ECw = evaluate(exp);
+    return round(ECw, decimals);
   } catch (error) {
-    throw Error(`Waiting Cost error: ${error}`)
+    throw Error(`Waiting Cost error: ${error}`);
   }
-}
+};
 
 /**
  * Method for calculating the total cost. Returns the value according to the ECt model.
@@ -63,12 +68,10 @@ export const WaitingCost = (waitingCost: number = 0, model: number = 1, lambda: 
  */
 export const TotalCost = (serverCost: number = 0, waitingCost: number = 0, decimals: number = 4): number => {
   try {
-
-    const exp = `${serverCost}+${waitingCost}`
-    const ECt = evaluate(exp)
-    return round(ECt, decimals)
-
+    const exp = `${serverCost}+${waitingCost}`;
+    const ECt = evaluate(exp);
+    return round(ECt, decimals);
   } catch (error) {
-    throw Error(`Total Cost error: ${error}`)
+    throw Error(`Total Cost error: ${error}`);
   }
-}
+};
