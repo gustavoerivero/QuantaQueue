@@ -10,23 +10,23 @@
   </table>
 </div>
 
-Here is an explanation of the ```time``` array and how it can be used:
+Here is an explanation of the `time` array and how it can be used:
 
 ## Time
 
-The ```time``` array is an array of objects representing time units and their values in seconds. The array contains a total of 16 time units, from ```nanosecond``` (id 1) to ```millennium``` (id 16).
+The `time` array is an array of objects representing time units and their values in seconds. The array contains a total of 16 time units, from `nanosecond` (id 1) to `millennium` (id 16).
 
 Each time unit object in the array has the following properties:
 
-- ```id```: The unique identifier of the time unit.
-- ```text```: The name of the time unit.
-- ```value```: The value of the time unit in seconds.
+- `id`: The unique identifier of the time unit.
+- `text`: The name of the time unit.
+- `value`: The value of the time unit in seconds.
 
 The array is ordered from smallest to largest, according to the value of the time unit in seconds.
 
 ### Example
 
-The following code shows how to get the value of the time unit ```Minute```:
+The following code shows how to get the value of the time unit `Minute`:
 
 ```typescript
 const minute = time[6].value; // 60 seconds
@@ -36,8 +36,8 @@ Also, being an array you can iterate over all time units:
 
 ```typescript
 time.forEach((unit) => {
-  console.log(unit.text, unit.value)
-})
+  console.log(unit.text, unit.value);
+});
 ```
 
 ### Errors
@@ -52,16 +52,16 @@ const minute = time[17].value; // Error: id 17 does not exist in the array
 
 You can get a specific value of the time unit in two ways:
 
-- By the ```id```: You can use the ```id``` of the time unit to get its value. For example, the following code gets the value of the ```Minute``` time unit:
+- By the `id`: You can use the `id` of the time unit to get its value. For example, the following code gets the value of the `Minute` time unit:
 
 ```typescript
 const minute = time[6].value; // 60 seconds
 ```
 
-- By the ```text```: You can use the ```text``` of the time unit to get its value. For example, the following code gets the value of the ```Minute``` time unit.
+- By the `text`: You can use the `text` of the time unit to get its value. For example, the following code gets the value of the `Minute` time unit.
 
 ```typescript
-const minute = time.find((unit) => unit.text === "Minute").value; // 60 seconds
+const minute = time.find((unit) => unit.text === 'Minute').value; // 60 seconds
 ```
 
 ### Units supported
@@ -69,7 +69,7 @@ const minute = time.find((unit) => unit.text === "Minute").value; // 60 seconds
 A table with the exact values contained in the array is shown below:
 
 | **_id_** | **text**     | **value**   |
-|----------|--------------|-------------|
+| -------- | ------------ | ----------- |
 | _1_      | Nanosecond   | 0.000000001 |
 | _2_      | Microsecond  | 0.000001    |
 | _3_      | Milisecond   | 0.001       |

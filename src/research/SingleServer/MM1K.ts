@@ -1,5 +1,5 @@
-import { evaluate, round } from "mathjs"
-import { Rho } from "../../basic"
+import { evaluate, round } from 'mathjs';
+import { Rho } from '../../basic';
 
 /**
  * Calculates the quantity of servers busy (C) for a M/M/1/k model.
@@ -38,35 +38,39 @@ import { Rho } from "../../basic"
  * ```
  */
 
-export const MMKQtyServerBusy = (lambda: number = 0, mu: number = 1, iteration: number = 1, limit: number = 1, decimals: number = 4): number => {
-  const n = iteration
-  const k = limit
+export const MMKQtyServerBusy = (
+  lambda: number = 0,
+  mu: number = 1,
+  iteration: number = 1,
+  limit: number = 1,
+  decimals: number = 4,
+): number => {
+  const n = iteration;
+  const k = limit;
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
     if (k === 0) {
-      throw Error(`The parameter 'limit' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'limit' cannot be equal to zero (0).`);
     }
 
     if (n < 0) {
-      throw Error(`The parameter 'iteration' cannot be lower than zero (0).`)
+      throw Error(`The parameter 'iteration' cannot be lower than zero (0).`);
     }
 
     if (n <= k) {
-      const exp = `((${lambda}/${mu})^${n})`
-      const c = evaluate(exp)
-      return Number(round(c, decimals))
+      const exp = `((${lambda}/${mu})^${n})`;
+      const c = evaluate(exp);
+      return Number(round(c, decimals));
     } else {
-      return Number(0)
+      return Number(0);
     }
-
   } catch (error) {
-    throw Error(`M/M/1/k Quantity of Servers Busy error: ${error}`)
+    throw Error(`M/M/1/k Quantity of Servers Busy error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the initial probability (P0) for a M/M/1/k model.
@@ -101,32 +105,35 @@ export const MMKQtyServerBusy = (lambda: number = 0, mu: number = 1, iteration: 
  * const result = MMKInitialProbability(lambda, mu, limit, decimals); // 0.7098
  * ```
  */
-export const MMKInitialProbability = (lambda: number = 0, mu: number = 1, limit: number = 1, decimals: number = 4): number => {
-  const k = limit
+export const MMKInitialProbability = (
+  lambda: number = 0,
+  mu: number = 1,
+  limit: number = 1,
+  decimals: number = 4,
+): number => {
+  const k = limit;
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
     if (k === 0) {
-      throw Error(`The parameter 'limit' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'limit' cannot be equal to zero (0).`);
     }
 
-    const rho = Rho(lambda, mu, 1, 15)
+    const rho = Rho(lambda, mu, 1, 15);
 
     if (rho === 1) {
-      throw Error(`The utilization factor 'rho' is equal to one (1). Cannot compute.`)
+      throw Error(`The utilization factor 'rho' is equal to one (1). Cannot compute.`);
     }
 
-    const exp = `(1-${rho})/(1-(${rho}^(${k}+1)))`
-    const p = evaluate(exp)
-    return Number(round(p, decimals))
-
+    const exp = `(1-${rho})/(1-(${rho}^(${k}+1)))`;
+    const p = evaluate(exp);
+    return Number(round(p, decimals));
   } catch (error) {
-    throw Error(`M/M/1/k Initial Probability error: ${error}`)
+    throw Error(`M/M/1/k Initial Probability error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the probability of having 'n' or fewer customers in the system (Pn) for a M/M/1/k model.
@@ -165,29 +172,33 @@ export const MMKInitialProbability = (lambda: number = 0, mu: number = 1, limit:
  * const result = MMKNProbability(lambda, mu, iteration, limit, decimals); // 0.4160
  * ```
  */
-export const MMKNProbability = (lambda: number = 0, mu: number = 1, iteration: number = 1, limit: number = 1, decimals: number = 4): number => {
-  const n = iteration
-  const k = limit
+export const MMKNProbability = (
+  lambda: number = 0,
+  mu: number = 1,
+  iteration: number = 1,
+  limit: number = 1,
+  decimals: number = 4,
+): number => {
+  const n = iteration;
+  const k = limit;
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
     if (k === 0) {
-      throw Error(`The parameter 'limit' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'limit' cannot be equal to zero (0).`);
     }
 
-    const rho = Rho(lambda, mu, 1, 15)
-    const po = MMKInitialProbability(lambda, mu, k, 15)
-    const exp = `${po}*(${rho}^${n})`
-    const p = evaluate(exp)
-    return Number(round(p, decimals))
-
+    const rho = Rho(lambda, mu, 1, 15);
+    const po = MMKInitialProbability(lambda, mu, k, 15);
+    const exp = `${po}*(${rho}^${n})`;
+    const p = evaluate(exp);
+    return Number(round(p, decimals));
   } catch (error) {
-    throw Error(`M/M/1/k n Probability error: ${error}`)
+    throw Error(`M/M/1/k n Probability error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the expected number of clients in the system (Ls) for a M/M/1/k model.
@@ -223,27 +234,25 @@ export const MMKNProbability = (lambda: number = 0, mu: number = 1, iteration: n
  * ```
  */
 export const MMKSClientEx = (lambda: number = 0, mu: number = 1, limit: number = 1, decimals: number = 4): number => {
-  const k = limit
+  const k = limit;
 
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
     if (k === 0) {
-      throw Error(`The parameter 'limit' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'limit' cannot be equal to zero (0).`);
     }
 
-    const rho = Rho(lambda, mu, 1, 15)
-    const exp = `(${rho}/(1-${rho}))-(((${k}+1)*(${rho}^(${k}+1)))/(1-(${rho}^(${k}+1))))`
-    const Ls = evaluate(exp)
-    return Number(round(Ls, decimals))
-
+    const rho = Rho(lambda, mu, 1, 15);
+    const exp = `(${rho}/(1-${rho}))-(((${k}+1)*(${rho}^(${k}+1)))/(1-(${rho}^(${k}+1))))`;
+    const Ls = evaluate(exp);
+    return Number(round(Ls, decimals));
   } catch (error) {
-    throw Error(`M/M/1/k Server Clients Expected error: ${error}`)
+    throw Error(`M/M/1/k Server Clients Expected error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the expected number of clients in the queue (Lq) for a M/M/1/k model.
@@ -280,27 +289,25 @@ export const MMKSClientEx = (lambda: number = 0, mu: number = 1, limit: number =
  * ```
  */
 export const MMKQClientEx = (lambda: number = 0, mu: number = 1, limit: number = 1, decimals: number = 4): number => {
-  const k = limit
+  const k = limit;
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
     if (k === 0) {
-      throw Error(`The parameter 'limit' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'limit' cannot be equal to zero (0).`);
     }
 
-    const Ls = MMKSClientEx(lambda, mu, k, 15)
-    const po = MMKInitialProbability(lambda, mu, k, 15)
-    const exp = `${Ls}-(1-${po})`
-    const Lq = evaluate(exp)
-    return Number(round(Lq, decimals))
-
+    const Ls = MMKSClientEx(lambda, mu, k, 15);
+    const po = MMKInitialProbability(lambda, mu, k, 15);
+    const exp = `${Ls}-(1-${po})`;
+    const Lq = evaluate(exp);
+    return Number(round(Lq, decimals));
   } catch (error) {
-    throw Error(`M/M/1/k Queue Clients Expected error: ${error}`)
+    throw Error(`M/M/1/k Queue Clients Expected error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the expected time a client spends in the queue (Wq) for a M/M/1/k model.
@@ -336,26 +343,24 @@ export const MMKQClientEx = (lambda: number = 0, mu: number = 1, limit: number =
  * ```
  */
 export const MMKQTimeEx = (lambda: number = 0, mu: number = 1, limit: number = 1, decimals: number = 4): number => {
-  const k = limit
+  const k = limit;
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
     if (k === 0) {
-      throw Error(`The parameter 'limit' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'limit' cannot be equal to zero (0).`);
     }
 
-    const Lq = MMKQClientEx(lambda, mu, k, 15)
-    const exp = `${Lq}/${lambda}`
-    const Wq = evaluate(exp)
-    return Number(round(Wq, decimals))
-
+    const Lq = MMKQClientEx(lambda, mu, k, 15);
+    const exp = `${Lq}/${lambda}`;
+    const Wq = evaluate(exp);
+    return Number(round(Wq, decimals));
   } catch (error) {
-    throw Error(`M/M/1/k Queue Time Expected error: ${error}`)
+    throw Error(`M/M/1/k Queue Time Expected error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the expected time a client spends in the system (Ws) for a M/M/1/k model.
@@ -391,23 +396,21 @@ export const MMKQTimeEx = (lambda: number = 0, mu: number = 1, limit: number = 1
  * ```
  */
 export const MMKSTimeEx = (lambda: number = 0, mu: number = 1, limit: number = 1, decimals: number = 4): number => {
-  const k = limit
+  const k = limit;
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
     if (k === 0) {
-      throw Error(`The parameter 'limit' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'limit' cannot be equal to zero (0).`);
     }
 
-    const Ls = MMKSClientEx(lambda, mu, k, 15)
-    const exp = `${Ls}/${lambda}`
-    const Ws = evaluate(exp)
-    return Number(round(Ws, decimals))
-
+    const Ls = MMKSClientEx(lambda, mu, k, 15);
+    const exp = `${Ls}/${lambda}`;
+    const Ws = evaluate(exp);
+    return Number(round(Ws, decimals));
   } catch (error) {
-    throw Error(`M/M/1/k Server Time Expected error: ${error}`)
+    throw Error(`M/M/1/k Server Time Expected error: ${error}`);
   }
-}
+};

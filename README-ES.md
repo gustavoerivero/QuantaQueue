@@ -24,15 +24,15 @@ QuantaQueue es una librería de TypeScript que provee un enfoque simplificado de
 
 ## Documentación
 
-| **_Índice_**           | **Definición**                                                                       |
-|------------------------|--------------------------------------------------------------------------------------|
-| _[Tipos](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/types/README-ES.md)_                | Tipos de variables manejados en la librería.                                         |
-| _[Unidades de tiempo](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/time/README-ES.md)_   | Un arreglo con las unidades de tiempo disponibles.                                   |
-| _[Básicos](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/basic/README-ES.md)_              | Funciones básicas que serán utilizadas en todos los modelos.                         |
-| _[Único servidor](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/SingleServer/README-ES.md)_       | Modelos de un solo servidor (M/M/1, M/M/1/k y M/G/1).                                |
+| **_Índice_**                                                                                                            | **Definición**                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --- |
+| _[Tipos](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/types/README-ES.md)_                               | Tipos de variables manejados en la librería.                                         |
+| _[Unidades de tiempo](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/time/README-ES.md)_                   | Un arreglo con las unidades de tiempo disponibles.                                   |
+| _[Básicos](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/basic/README-ES.md)_                             | Funciones básicas que serán utilizadas en todos los modelos.                         |
+| _[Único servidor](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/SingleServer/README-ES.md)_      | Modelos de un solo servidor (M/M/1, M/M/1/k y M/G/1).                                |
 | _[Múltiples servidores](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/MultiServer/README-ES.md)_ | Modelos de múltiples servidores (M/M/s y M/M/s/k).                                   |
-| _[General](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/General/README-ES.md)_              | Funciones que agrupan y ejecutan el modelo acorde al parámetro "model" especificado. |
-| _[Costo](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/Cost/README-ES.md)_                | Funciones para calcular los costos de ciertos modelos.                               |                                 |
+| _[General](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/General/README-ES.md)_                  | Funciones que agrupan y ejecutan el modelo acorde al parámetro "model" especificado. |
+| _[Costo](https://github.com/gustavoerivero/QuantaQueue/blob/main/src/research/Cost/README-ES.md)_                       | Funciones para calcular los costos de ciertos modelos.                               |     |
 
 ## Instalación
 
@@ -65,4 +65,5 @@ Por favor, asegúrese de actualizar las pruebas según corresponda.
 [MIT](https://choosealicense.com/licenses/mit/)
 
 ---
+
 ⌨️ hecho con ❤️ por [gustavoerivero](https://github.com/gustavoerivero) y [Warloy](https://github.com/Warloy)

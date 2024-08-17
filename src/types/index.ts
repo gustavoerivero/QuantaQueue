@@ -1,2 +1,2 @@
-export * from './TimeUnit'
-export * from './ModelResult'
+export * from './TimeUnit';
+export * from './ModelResult';

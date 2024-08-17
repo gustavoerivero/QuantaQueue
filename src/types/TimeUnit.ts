@@ -1,5 +1,5 @@
 export type TimeUnit = {
-  id: number
-  text: string
-  value: number
-}
+  id: number;
+  text: string;
+  value: number;
+};

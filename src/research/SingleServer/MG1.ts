@@ -1,6 +1,6 @@
-import { evaluate, round } from "mathjs"
-import { Rho } from "../../basic"
-import { SSInitialProbability } from "./singleServer"
+import { evaluate, round } from 'mathjs';
+import { Rho } from '../../basic';
+import { SSInitialProbability } from './singleServer';
 
 /**
  * Calculates the initial probability (Po) for a M/G/1 model.
@@ -34,20 +34,18 @@ import { SSInitialProbability } from "./singleServer"
  */
 export const MGInitialProbability = (lambda: number = 0, mu: number = 1, decimals: number = 4): number => {
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
-    const rho = Rho(lambda, mu, 1, 15)
-    const exp = `1-${rho}`
-    const p = evaluate(exp)
-    return Number(round(p, decimals))
-
+    const rho = Rho(lambda, mu, 1, 15);
+    const exp = `1-${rho}`;
+    const p = evaluate(exp);
+    return Number(round(p, decimals));
   } catch (error) {
-    throw Error(`M/G/1 Initial Probability error: ${error}`)
+    throw Error(`M/G/1 Initial Probability error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the probability of having 'n' customers in the system (Pn) for a M/G/1 model.
@@ -83,28 +81,31 @@ export const MGInitialProbability = (lambda: number = 0, mu: number = 1, decimal
  * const result = MGNProbability(lambda, mu, iteration, decimals); // 0.1024
  * ```
  */
-export const MGNProbability = (lambda: number = 0, mu: number = 1, iteration: number = 1, decimals: number = 4): number => {
-  const n = iteration
+export const MGNProbability = (
+  lambda: number = 0,
+  mu: number = 1,
+  iteration: number = 1,
+  decimals: number = 4,
+): number => {
+  const n = iteration;
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
     if (n < 1) {
-      throw Error(`The parameter 'n' cannot be lower than one (1).`)
+      throw Error(`The parameter 'n' cannot be lower than one (1).`);
     }
 
-    const rho = Rho(lambda, mu, 1, 15)
-    const po = SSInitialProbability(lambda, mu, 15)
-    const exp = `(${rho}^${n})*${po}`
-    const p = evaluate(exp)
-    return Number(round(p, decimals))
-
+    const rho = Rho(lambda, mu, 1, 15);
+    const po = SSInitialProbability(lambda, mu, 15);
+    const exp = `(${rho}^${n})*${po}`;
+    const p = evaluate(exp);
+    return Number(round(p, decimals));
   } catch (error) {
-    throw Error(`M/G/1 N Probability error: ${error}`)
+    throw Error(`M/G/1 N Probability error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the expected number of customers in the queue (Lq) for a M/G/1 model.
@@ -141,23 +142,26 @@ export const MGNProbability = (lambda: number = 0, mu: number = 1, iteration: nu
  * const result = MGQClientEx(lambda, mu, variation, decimals); // 1.4625
  * ```
  */
-export const MGQClientEx = (lambda: number = 0, mu: number = 1, variation: number = 0, decimals: number = 4): number => {
-  const v = variation
+export const MGQClientEx = (
+  lambda: number = 0,
+  mu: number = 1,
+  variation: number = 0,
+  decimals: number = 4,
+): number => {
+  const v = variation;
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
-    const rho = Rho(lambda, mu, 1, 15)
-    const exp = `(((${lambda}^2)*(${v}^2))+(${rho}^2))/(2*(1-${rho}))`
-    const Lq = evaluate(exp)
-    return Number(round(Lq, decimals))
-
+    const rho = Rho(lambda, mu, 1, 15);
+    const exp = `(((${lambda}^2)*(${v}^2))+(${rho}^2))/(2*(1-${rho}))`;
+    const Lq = evaluate(exp);
+    return Number(round(Lq, decimals));
   } catch (error) {
-    throw Error(`M/G/1 Queue Clients Expected error: ${error}`)
+    throw Error(`M/G/1 Queue Clients Expected error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the expected number of customers in the system (Ls) for a M/G/1 model.
@@ -194,23 +198,21 @@ export const MGQClientEx = (lambda: number = 0, mu: number = 1, variation: numbe
  * ```
  */
 export const MGSClientEx = (lambda: number = 0, mu: number = 1, variation: number = 0, decimals = 4): number => {
-  const v = variation
+  const v = variation;
   try {
-
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
-    const rho = Rho(lambda, mu, 1, 15)
-    const Lq = MGQClientEx(lambda, mu, v, 15)
-    const exp = `${rho}+${Lq}`
-    const Ls = evaluate(exp)
-    return Number(round(Ls, decimals))
-
+    const rho = Rho(lambda, mu, 1, 15);
+    const Lq = MGQClientEx(lambda, mu, v, 15);
+    const exp = `${rho}+${Lq}`;
+    const Ls = evaluate(exp);
+    return Number(round(Ls, decimals));
   } catch (error) {
-    throw Error(`M/G/1 System Clients Expected error: ${error}`)
+    throw Error(`M/G/1 System Clients Expected error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the expected time a customer spends in the queue (Wq) for a M/G/1 model.
@@ -246,22 +248,20 @@ export const MGSClientEx = (lambda: number = 0, mu: number = 1, variation: numbe
  * ```
  */
 export const MGQTimeEx = (lambda: number = 0, mu: number = 1, variation: number = 0, decimals: number = 4): number => {
-  const v = variation
+  const v = variation;
   try {
-    
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
-    const Lq = MGQClientEx(lambda, mu, v, 15)
-    const exp = `${Lq}/${lambda}`
-    const Wq = evaluate(exp)
-    return Number(round(Wq, decimals))
-
+    const Lq = MGQClientEx(lambda, mu, v, 15);
+    const exp = `${Lq}/${lambda}`;
+    const Wq = evaluate(exp);
+    return Number(round(Wq, decimals));
   } catch (error) {
-    throw Error(`M/G/1 Queue Time Expected error: ${error}`)
+    throw Error(`M/G/1 Queue Time Expected error: ${error}`);
   }
-}
+};
 
 /**
  * Calculates the expected time a customer spends in the system (Ws) for a M/G/1 model.
@@ -297,19 +297,17 @@ export const MGQTimeEx = (lambda: number = 0, mu: number = 1, variation: number 
  * ```
  */
 export const MGSTimeEx = (lambda: number = 0, mu: number = 1, variation: number = 0, decimals: number = 4): number => {
-  const v = variation
+  const v = variation;
   try {
-    
     if (mu === 0) {
-      throw Error(`The parameter 'mu' cannot be equal to zero (0).`)
+      throw Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
 
-    const Wq = MGQTimeEx(lambda, mu, v, 15)
-    const exp = `${Wq}+(1/${mu})`
-    const Ws = evaluate(exp)
-    return Number(round(Ws, decimals))
-
+    const Wq = MGQTimeEx(lambda, mu, v, 15);
+    const exp = `${Wq}+(1/${mu})`;
+    const Ws = evaluate(exp);
+    return Number(round(Ws, decimals));
   } catch (error) {
-    throw Error(`M/G/1 System Time Expected error: ${error}`)
+    throw Error(`M/G/1 System Time Expected error: ${error}`);
   }
-}
+};
