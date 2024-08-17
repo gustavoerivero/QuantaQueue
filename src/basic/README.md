@@ -65,7 +65,7 @@ Inverse(val) = 1 / val
 
 ## Percent
 
-La función `Percent` convierte un número a un formato de porcentaje. El porcentaje es una forma de expresar una cantidad como una parte de un todo. Por ejemplo, 25% significa 25 de cada 100, o 0.25 de 1.
+The `Percent` function converts a number to a percentage format. Percent is a way of expressing a quantity as a part of a whole. Example, 25% means 25 out of 100, or 0.25 out of 1.
 
 It is recommended that, when 100% is equal to 1 and the value you want to calculate the percentage is less than this 1, use the standard form of the method (Only passing the `value` parameter).
 
