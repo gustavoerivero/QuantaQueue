@@ -54,6 +54,8 @@
     "lint:fix": "eslint src/**/*.ts --fix",
     "format:check": "prettier . --check",
     "format:write": "prettier . --write",
+    "force:check": "eslint src/**/*.ts & prettier . --check",
+    "force:fix": "eslint src/**/*.ts --fix & prettier . --write",
     "prepare": "husky"
   },
   "husky": {
@@ -64,7 +66,9 @@
   "lint-staged": {
     "*.{js,ts,json,md}": [
       "eslint",
-      "prettier . --check",
+      "prettier . --check"
+    ],
+    "**/*.test.{js,ts}": [
       "jest"
     ]
   }

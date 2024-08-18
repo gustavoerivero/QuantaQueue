@@ -37,7 +37,6 @@ import { Rho } from '../../basic';
  * const result = MMKQtyServerBusy(lambda, mu, iteration, limit, decimals); // 0.7683
  * ```
  */
-
 export const MMKQtyServerBusy = (
   lambda: number = 0,
   mu: number = 1,
