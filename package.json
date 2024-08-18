@@ -50,7 +50,7 @@
   "scripts": {
     "build": "tsc",
     "release": "npm run build && changeset publish",
-    "update:patch": "npm version patch",
+    "update:version": "changeset",
     "publish": "npm publish --access=public",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
