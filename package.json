@@ -1,6 +1,6 @@
 {
   "name": "quantaqueue",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "keywords": [
@@ -25,6 +25,7 @@
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/preset-typescript": "^7.24.7",
+    "@changesets/cli": "^2.27.7",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.4.0",
     "@typescript-eslint/eslint-plugin": "^8.1.0",
@@ -44,7 +45,6 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@changesets/cli": "^2.27.7",
     "mathjs": "^13.0.3"
   },
   "scripts": {
