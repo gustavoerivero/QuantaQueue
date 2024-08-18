@@ -345,6 +345,63 @@ La función `SSQTimeEx` utiliza esta fórmula para calcular el tiempo medio de e
 
 Este modelo de colas es una extensión del modelo M/M/1 que se utiliza para modelar sistemas de colas con un servidor y k canales de servicio. El modelo M/M/1/k se puede utilizar para calcular la longitud media de la cola, el tiempo medio de espera en la cola y el tiempo medio de servicio, así como el número medio de clientes en cada canal de servicio.
 
+### MMKQtyServerBusy
+
+La función `MMKQtyServerBusy` calcula la cantidad de servidores ocupados `(C)` para modelos de tipo M/M/1/k.
+
+#### Parámetros
+
+La función `MMKQtyServerBusy` tiene los siguientes parámetros:
+
+- `lambda`: La tasa de llegada de clientes al sistema. El valor predeterminado es 0.
+- `mu`: La tasa de clientes servidos en el sistema. El valor predeterminado es 1.
+- `iteration`: Iteración correspondiente. El valor predeterminado es 1.
+- `limit`: El máximo número de clientes en el sistema. El valor predeterminado es 1.
+- `decimals`: El número de decimales a los que se va a redondear el resultado. El valor predeterminado es 4.
+
+#### Retorno
+
+La función `MMKQtyServerBus` devuelve un número que representa la cantidad de servidores ocupados `(C)`.
+
+#### Errores
+
+La función `MMKQtyServerBusy` puede arrojar los siguientes errores:
+
+- `Error`: Si el parámetro `mu` es igual a 0.
+- `Error`: Si el parámetro `limit` es igual a 0.
+- `Error`: Si el parámetro `iteration` es menor a 0.
+
+#### Ejemplo de uso
+
+El siguiente código calcula la cantidad de servidores ocupados en un sistema de un servidor con los siguientes parámetros:
+
+```typescript
+// Calculate the quantity of servers busy (C) for a M/M/1/k model with the following parameters:
+const lambda = 0.5; // customer arrival rate per unit time
+const mu = 0.2; // customer service rate per unit time
+const iteration = 3; // current iteration
+const limit = 5; // maximum number of customers in the system (k)
+const decimals = 4; // number of decimal places to round the result
+const result = MMKQtyServerBusy(lambda, mu, iteration, limit, decimals); // 0.7683
+```
+
+#### Explicación matemática
+
+La función utiliza la siguiente fórmula para calcular la cantidad de servidores ocupados `(C)` en un modelo M/M/1/k:
+
+```matlab
+C = (lambda / mu)^n
+```
+
+donde:
+
+- `C`: Cantidad de servidores ocupados.
+- `lambda`: La tasa de llegada de clientes.
+- `mu`: La tasa de servicio.
+- `rho`: El factor de utilización del sistema.
+
+Esta fórmula representa la probabilidad de tener exactamente `n` clientes en el sistema. Al elevar la razón de la tasa de llegadas a la tasa de servicio a la potencia de `n`, se obtiene una medida de la congestión del sistema par aun número específico de clientes.
+
 ## M/G/1
 
 Este modelo de colas es un modelo general que se utiliza para modelar sistemas de colas con un servidor, tiempos de llegada exponenciales y tiempos de servicio distribuidos de acuerdo con una distribución general.

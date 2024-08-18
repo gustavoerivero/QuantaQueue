@@ -372,7 +372,7 @@ export const QClientEx = (
     switch (model) {
       case 1:
         return {
-          result: SSQClientEx(lambda, mu, 1, decimals),
+          result: SSQClientEx(lambda, mu, decimals),
           message: 'Successful calculation for the M/M/1 model.',
         };
 
@@ -465,7 +465,7 @@ export const SClientEx = (
     switch (model) {
       case 1:
         return {
-          result: SSSClientEx(lambda, mu, 1, decimals),
+          result: SSSClientEx(lambda, mu, decimals),
           message: 'Successful calculation for the M/M/1 model.',
         };
 
@@ -558,7 +558,7 @@ export const QTimeEx = (
     switch (model) {
       case 1:
         return {
-          result: SSQTimeEx(lambda, mu, 1, decimals),
+          result: SSQTimeEx(lambda, mu, decimals),
           message: 'Successful calculation for the M/M/1 model.',
         };
 
@@ -651,7 +651,7 @@ export const STimeEx = (
     switch (model) {
       case 1:
         return {
-          result: SSSTimeEx(lambda, mu, 1, decimals),
+          result: SSSTimeEx(lambda, mu, decimals),
           message: 'Successful calculation for the M/M/1 model.',
         };
 
