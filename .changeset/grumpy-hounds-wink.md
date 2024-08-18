@@ -1,0 +1,5 @@
+---
+'quantaqueue': patch
+---
+
+Update .npmignore
