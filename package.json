@@ -68,7 +68,7 @@
       "eslint",
       "prettier . --check"
     ],
-    "*.test.{js,ts}": [
+    "**/*.test.{js,ts}": [
       "jest"
     ]
   }
