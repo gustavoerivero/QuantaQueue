@@ -1,1 +1,3 @@
-export * from './units'
+import time from './units';
+
+export { time };

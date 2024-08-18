@@ -1,0 +1,17 @@
+export type TimeText =
+  | 'Nanosecond'
+  | 'Microsecond'
+  | 'Millisecond'
+  | 'Centisecond'
+  | 'Decitosecond'
+  | 'Second'
+  | 'Minute'
+  | 'Hour'
+  | 'Day'
+  | 'Week'
+  | 'Month'
+  | 'Year'
+  | 'Lustrum'
+  | 'Decade'
+  | 'Century'
+  | 'Millennium';

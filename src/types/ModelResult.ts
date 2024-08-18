@@ -1,4 +1,4 @@
 export type ModelResult = {
-  result: number | null
-  message: string
-}
+  result: number | null;
+  message: string;
+};

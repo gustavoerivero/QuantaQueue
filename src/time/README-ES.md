@@ -10,17 +10,17 @@
   </table>
 </div>
 
-Acá se explica el arreglo ```time``` y cómo se puede utilizar:
+Acá se explica el arreglo `time` y cómo se puede utilizar:
 
 ## Time
 
-El arreglo ```time``` es un arreglo de objetos que representan unidades de tiempo y sus valores en segundos. El array contiene un total de 16 unidades de tiempo, desde "Nanosegundo" (id 1) hasta "Milenio" (id 16).
+El arreglo `time` es un arreglo de objetos que representan unidades de tiempo y sus valores en segundos. El array contiene un total de 16 unidades de tiempo, desde "Nanosegundo" (id 1) hasta "Milenio" (id 16).
 
 Cada objeto de unidad de tiempo en el array tiene las siguientes propiedades:
 
-- ```id```: El identificador único de la unidad de tiempo.
-- ```text```: El nombre de la unidad de tiempo.
-- ```value```: El valor de la unidad de tiempo en segundos.
+- `id`: El identificador único de la unidad de tiempo.
+- `text`: El nombre de la unidad de tiempo.
+- `value`: El valor de la unidad de tiempo en segundos.
 
 El array está ordenado de menor a mayor, según el valor de la unidad de tiempo en segundos.
 
@@ -36,8 +36,8 @@ También, al ser un array se puede iterar sobre todas las unidades de tiempo:
 
 ```typescript
 time.forEach((unit) => {
-  console.log(unit.text, unit.value)
-})
+  console.log(unit.text, unit.value);
+});
 ```
 
 ### Errores
@@ -52,16 +52,16 @@ const minute = time[17].value; // Error: El id 17 no existe en el array
 
 Se puede obtener un valor específico de la unidad de tiempo de dos maneras:
 
-- Por el ```id```: Se puede utilizar el ```id``` de la unidad de tiempo para obbtener su valor. Por ejemplo, el siguiente código obtiene el valor de la unidad de tiempo "Minuto":
+- Por el `id`: Se puede utilizar el `id` de la unidad de tiempo para obbtener su valor. Por ejemplo, el siguiente código obtiene el valor de la unidad de tiempo "Minuto":
 
 ```typescript
 const minute = time[6].value; // 60 segundos
 ```
 
-- Por el ```text```: Se puede utilizar el ```text``` de la unidad de tiempo para obtener su valor. Por ejemplo, el siguiente código obtiene el valor de la unidad de tiempo "Minuto".
+- Por el `text`: Se puede utilizar el `text` de la unidad de tiempo para obtener su valor. Por ejemplo, el siguiente código obtiene el valor de la unidad de tiempo "Minuto".
 
 ```typescript
-const minute = time.find((unit) => unit.text === "Minute").value; // 60 segundos
+const minute = time.find((unit) => unit.text === 'Minute').value; // 60 segundos
 ```
 
 ### Unidades soportadas
@@ -69,7 +69,7 @@ const minute = time.find((unit) => unit.text === "Minute").value; // 60 segundos
 A continuación, se muestra una tabla con los valores exactos que contiene el array:
 
 | **_id_** | **text**     | **value**   |
-|----------|--------------|-------------|
+| -------- | ------------ | ----------- |
 | _1_      | Nanosecond   | 0.000000001 |
 | _2_      | Microsecond  | 0.000001    |
 | _3_      | Milisecond   | 0.001       |
