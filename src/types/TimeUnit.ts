@@ -1,3 +1,5 @@
+import { TimeText } from './TimeText';
+
 /**
  * The ``TimeUnit`` data type consists of an object containing
  * the ``id``, ``text`` and ``value`` properties. The ``id`` property
@@ -8,6 +10,6 @@
  */
 export type TimeUnit = {
   id: number;
-  text: string;
+  text: TimeText;
   value: number;
 };

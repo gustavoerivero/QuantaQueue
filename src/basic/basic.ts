@@ -18,14 +18,6 @@ import { evaluate, parse, round } from 'mathjs';
  * ```
  */
 export const Inverse = (val: number = 1, decimals: number = 4): number => {
-  if (typeof val !== 'number') {
-    throw new Error(`The "val" variable must have a numeric value.`);
-  }
-
-  if (typeof decimals !== 'number') {
-    throw new Error(`The "decimals" variable must have a numeric value.`);
-  }
-
   if (val === 0) {
     throw new Error(`The parameter 'val' cannot be equal to zero (0).`);
   }
@@ -35,7 +27,7 @@ export const Inverse = (val: number = 1, decimals: number = 4): number => {
     const inv = evaluate(exp);
     return round(Number(inv), decimals);
   } catch (error) {
-    throw new Error(`The parameter 'val' cannot be equal to 0: ${error}`);
+    throw new Error(`Inverse function error.\n${error}`);
   }
 };
 
@@ -69,18 +61,6 @@ export const Percent = (
   decimals: number = 4,
 ): string => {
   try {
-    if (typeof value !== 'number') {
-      throw new Error(`The "value" variable must have a numeric value.`);
-    }
-
-    if (typeof total !== 'number') {
-      throw new Error(`The "total" variable must have a numeric value.`);
-    }
-
-    if (typeof decimals !== 'number') {
-      throw new Error(`The "decimals" variable must have a numeric value.`);
-    }
-
     if (total === 0) {
       throw new Error(`The parameter 'total' cannot be equal to zero (0).`);
     }
@@ -120,40 +100,28 @@ export const Percent = (
  * const minutes = 30;
  * const sourceUnit = time.find(unit => unit.text === 'Minute')!.value; // 60 (seconds)
  * const targetUnit = time.find(unit => unit.text === 'Hour')!.value; // 3600 (seconds)
- * const convertedValue = Convert(minutes, sourceUnit, targetUnit); // 0.5
+ * const convertedValue = Convert(minutes, sourceUnit, targetUnit); // 2
  * ```
  */
 export const Convert = (sourceValue: number, sourceUnit: number, targetUnit: number, decimals: number = 4): number => {
   try {
-    if (!sourceValue || typeof sourceValue !== 'number') {
-      throw new Error(`The "timeUnit" variable must have a numeric value.`);
+    if (targetUnit <= 0) {
+      throw new Error(`The "targetUnit" variable cannot be minor or equal to zero (0) (targetUnit <= 0).`);
     }
 
-    if (!sourceUnit || typeof sourceUnit !== 'number') {
-      throw new Error(`The "variableTime" variable must have a numeric value.`);
-    }
-
-    if (!targetUnit || typeof targetUnit !== 'number') {
-      throw new Error(`The "timeUnitVariable" variable must have a numeric value.`);
-    }
-
-    if (typeof decimals !== 'number') {
-      throw new Error(`The "decimals" variable must have a numeric value.`);
-    }
-
-    if (targetUnit === 0) {
-      throw new Error(`The variable "variableTime" cannot be equal to zero (0).`);
+    if (sourceUnit === 0) {
+      throw new Error(`The "sourceUnit" variable cannot be equal to zero (0).`);
     }
 
     if (sourceValue === 0) {
-      throw new Error(`The variable "timeUnitVariable" cannot be equal to zero (0).`);
+      throw new Error(`The "sourceValue" variable cannot be equal to zero (0).`);
     }
 
     const exp = `(1/(${sourceValue}*${sourceUnit}))*${targetUnit}`;
     const res = evaluate(exp);
     return Number(round(res, decimals));
   } catch (error) {
-    throw new Error(`Calculate error: ${error}`);
+    throw new Error(`Calculate error.\n${error}`);
   }
 };
 
@@ -185,22 +153,6 @@ export const Summation = (
   decimals: number = 4,
 ): number => {
   try {
-    if (typeof lowerLimit !== 'number') {
-      throw new Error(`The "lowerLimit" variable must have a numeric value.`);
-    }
-
-    if (typeof upperLimit !== 'number') {
-      throw new Error(`The "upperLimit" variable must have a numeric value.`);
-    }
-
-    if (typeof expression !== 'string') {
-      throw new Error(`The "expression" variable must have a string value.`);
-    }
-
-    if (typeof decimals !== 'number') {
-      throw new Error(`The "decimals" variable must have a numeric value.`);
-    }
-
     lowerLimit = lowerLimit ?? 0;
     upperLimit = upperLimit ?? 0;
     expression = expression ?? 'n';
@@ -221,7 +173,7 @@ export const Summation = (
 
     return Number(round(sum, decimals));
   } catch (error) {
-    throw new Error(`Summation error: ${error}`);
+    throw new Error(`Summation error.\n${error}`);
   }
 };
 
@@ -250,22 +202,6 @@ export const Summation = (
  */
 export const Rho = (lambda: number = 0, mu: number = 1, serverSize: number = 1, decimals: number = 4): number => {
   try {
-    if (typeof lambda !== 'number') {
-      throw new Error(`The "lambda" variable must have a numeric value.`);
-    }
-
-    if (typeof mu !== 'number') {
-      throw new Error(`The "mu" variable must have a numeric value.`);
-    }
-
-    if (typeof serverSize !== 'number') {
-      throw new Error(`The "serverSize" variable must have a numeric value.`);
-    }
-
-    if (typeof decimals !== 'number') {
-      throw new Error(`The "decimals" variable must have a numeric value.`);
-    }
-
     if (mu === 0) {
       throw new Error(`The parameter 'mu' cannot be equal to zero (0).`);
     }
@@ -285,6 +221,6 @@ export const Rho = (lambda: number = 0, mu: number = 1, serverSize: number = 1, 
 
     return Number(round(rho, decimals));
   } catch (error) {
-    throw new Error(`System utilization factor error: ${error}`);
+    throw new Error(`System utilization factor error.\n${error}`);
   }
 };
