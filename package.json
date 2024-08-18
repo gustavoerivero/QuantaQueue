@@ -1,6 +1,6 @@
 {
   "name": "quantaqueue",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "keywords": [
@@ -44,11 +44,14 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@changesets/cli": "^2.27.7",
     "mathjs": "^13.0.3"
   },
   "scripts": {
     "build": "tsc",
     "release": "npm run build && changeset publish",
+    "update:patch": "npm version patch",
+    "publish": "npm publish --access=public",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
