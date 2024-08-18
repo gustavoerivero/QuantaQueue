@@ -2,7 +2,7 @@
   "name": "quantaqueue",
   "version": "0.0.7",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "keywords": [
     "Operations",
     "Research",
@@ -50,7 +50,7 @@
   "scripts": {
     "build": "tsc",
     "release": "npm run build && changeset publish",
-    "update:patch": "npm version patch",
+    "update:version": "changeset",
     "publish": "npm publish --access=public",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
