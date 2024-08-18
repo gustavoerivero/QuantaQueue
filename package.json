@@ -1,5 +1,6 @@
 {
   "name": "quantaqueue",
+  "description": "QuantaQueue is a TypeScript library that provides a simplified approach to queueing theory operations. Developed from the powerful Math.js library, it offers a comprehensive set of methods and functions for performing accurate and efficient mathematical calculations.",
   "version": "0.0.9",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
